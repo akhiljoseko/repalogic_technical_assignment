@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_app/core/theme/app_theme.dart';
 import 'package:flutter_auth_app/l10n/l10n.dart';
+import 'package:flutter_auth_app/modules/authentication/presentation/login/login_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -7,14 +9,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.light,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      home: const LoginScreen(),
     );
   }
 }

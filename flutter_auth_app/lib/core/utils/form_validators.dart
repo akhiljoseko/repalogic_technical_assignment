@@ -69,12 +69,12 @@ class FormValidators {
   /// Validates minimum length requirement
   ///
   /// Returns null if valid, error message if invalid
-  static String? validateMinLength(
+  static String? validateMinLength({
+    required int minLength,
+    required String fieldName,
+    required AppLocalizations l10n,
     String? value,
-    int minLength,
-    String fieldName,
-    AppLocalizations l10n,
-  ) {
+  }) {
     if (value == null || value.isEmpty) {
       return '$fieldName is required';
     }
