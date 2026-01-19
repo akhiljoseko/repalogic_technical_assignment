@@ -1,9 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter_auth_app/core/exceptions/app_exception.dart';
 import 'package:flutter_auth_app/core/utils/result.dart';
 import 'package:flutter_auth_app/modules/authentication/domain/entities/user.dart';
 import 'package:flutter_auth_app/modules/authentication/domain/repositories/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
+  final _controller = StreamController<User?>.broadcast();
+
+  @override
+  Stream<User?> get authStateChanges => _controller.stream;
+
   @override
   Future<Result<User>> loginWithPassword({
     required String email,
@@ -11,6 +18,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }) async {
     try {
       final user = User(id: '1', name: 'John Doe', email: email);
+      _controller.add(user);
       return Result.ok(user);
     } on AppException catch (e) {
       return Result.error(e);
@@ -22,5 +30,15 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         ),
       );
     }
+  }
+
+  @override
+  Future<void> logout() async {
+    _controller.add(null);
+  }
+
+  @override
+  void dispose() {
+    _controller.close();
   }
 }

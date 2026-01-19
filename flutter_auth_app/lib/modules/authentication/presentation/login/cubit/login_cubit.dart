@@ -28,7 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
 
     switch (result) {
       case Ok<User>():
-        emit(const LoginState.success());
+        emit(LoginState.success(result.value));
       case Error<User>():
         emit(LoginState.error(result.error));
     }
