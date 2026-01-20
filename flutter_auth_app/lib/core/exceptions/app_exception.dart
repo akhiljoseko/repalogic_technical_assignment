@@ -1,14 +1,23 @@
 import 'package:flutter_auth_app/l10n/gen/app_localizations.dart';
 
+/// Base class for all application-specific exceptions.
+///
+/// Encapsulates an error code for programmatic handling and a message
+/// for debugging. Subclasses must implement [localize] to provide
+/// user-friendly error messages.
 abstract class AppException implements Exception {
   AppException({
     required this.errorCode,
     required this.errorMessage,
   });
 
+  /// A unique string identifier for the error type.
   final String errorCode;
+
+  /// A non-localized message describing the error (primarily for logging).
   final String errorMessage;
 
+  /// Returns a localized, user-facing error message.
   String localize(AppLocalizations l10n);
 
   @override
@@ -17,6 +26,7 @@ abstract class AppException implements Exception {
   }
 }
 
+/// Represents an unexpected or unhandled error within the application.
 final class UnknownException extends AppException {
   UnknownException({
     super.errorCode = 'unknown',

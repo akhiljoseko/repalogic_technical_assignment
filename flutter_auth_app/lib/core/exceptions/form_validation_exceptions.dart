@@ -14,7 +14,7 @@ sealed class FormValidationException extends AppException {
   }
 }
 
-/// Exception thrown when a required field is empty
+/// Exception thrown when a required field is empty.
 final class RequiredFieldException extends FormValidationException {
   RequiredFieldException({
     required this.fieldName,
@@ -22,6 +22,7 @@ final class RequiredFieldException extends FormValidationException {
     super.errorMessage = 'Field is required',
   });
 
+  /// The name of the field that is missing (e.g., 'Email', 'Password').
   final String fieldName;
 
   @override
@@ -30,7 +31,7 @@ final class RequiredFieldException extends FormValidationException {
   }
 }
 
-/// Exception thrown when email format is invalid
+/// Exception thrown when the provided email string does not match a valid email format.
 final class InvalidEmailException extends FormValidationException {
   InvalidEmailException({
     super.errorCode = 'invalid_email',
@@ -43,7 +44,7 @@ final class InvalidEmailException extends FormValidationException {
   }
 }
 
-/// Exception thrown when input is below minimum length
+/// Exception thrown when a field's input is shorter than the required [minLength].
 final class MinLengthException extends FormValidationException {
   MinLengthException({
     required this.fieldName,
@@ -52,7 +53,10 @@ final class MinLengthException extends FormValidationException {
     super.errorMessage = 'Input is too short',
   });
 
+  /// The name of the field.
   final String fieldName;
+
+  /// The minimum required length for this field.
   final int minLength;
 
   @override
@@ -61,7 +65,7 @@ final class MinLengthException extends FormValidationException {
   }
 }
 
-/// Exception thrown when input format is invalid
+/// Exception thrown when the input format is invalid for a specific [fieldName].
 final class InvalidFormatException extends FormValidationException {
   InvalidFormatException({
     required this.fieldName,
@@ -69,6 +73,7 @@ final class InvalidFormatException extends FormValidationException {
     super.errorMessage = 'Format is invalid',
   });
 
+  /// The name of the field.
   final String fieldName;
 
   @override

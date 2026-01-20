@@ -13,6 +13,11 @@ import 'package:flutter_auth_app/services/password_encryption_service_impl.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
+/// Bootstraps the application by initializing the [AuthenticationRepository],
+/// [AuthCubit], and other core dependencies.
+///
+/// This function wraps the application with [MultiRepositoryProvider] and
+/// [BlocProvider] to ensure core services are available throughout the app.
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
@@ -22,17 +27,21 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   await Hive.initFlutter();
   Hive.registerAdapters();
 
+  // Initialize the repository implementation.
+  // Note: The constructor for AuthenticationRepositoryImpl might need to be updated
+  // to accept these dependencies as optional or to have default implementations.
+  final authRepository = AuthenticationRepositoryImpl(
+    localDataSource: AuthLocalDataSourceImpl(
+      localDatabase: HiveBoxLocalDatabase<UserModel>('users'),
+    ),
+    passwordEncryptionService: PasswordEncryptionServiceImpl(),
+  );
+
   runApp(
     MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<AuthenticationRepository>(
-          create: (_) => AuthenticationRepositoryImpl(
-            localDataSource: AuthLocalDataSourceImpl(
-              localDatabase: HiveBoxLocalDatabase<UserModel>('users'),
-            ),
-            passwordEncryptionService: PasswordEncryptionServiceImpl(),
-          ),
-          dispose: (repo) => repo.dispose(),
+        RepositoryProvider<AuthenticationRepository>.value(
+          value: authRepository,
         ),
       ],
       child: BlocProvider(

@@ -8,6 +8,8 @@ import 'package:go_router/go_router.dart';
 
 part 'app_router.g.dart';
 
+/// Standard route for the Home screen.
+/// Requires the user to be authenticated.
 @TypedGoRoute<HomeRoute>(
   path: '/',
   name: HomeScreen.routeName,
@@ -19,6 +21,8 @@ class HomeRoute extends GoRouteData with $HomeRoute {
   Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
 }
 
+/// Standard route for the Login screen.
+/// Accessible when unauthenticated.
 @TypedGoRoute<LoginRoute>(
   path: '/login',
   name: LoginScreen.routeName,
@@ -31,6 +35,8 @@ class LoginRoute extends GoRouteData with $LoginRoute {
       const LoginScreen();
 }
 
+/// Standard route for the Register screen.
+/// Accessible when unauthenticated.
 @TypedGoRoute<RegisterRoute>(
   path: '/register',
   name: RegisterScreen.routeName,
@@ -43,6 +49,12 @@ class RegisterRoute extends GoRouteData with $RegisterRoute {
       const RegisterScreen();
 }
 
+/// Manages the application's routing configuration using [GoRouter].
+///
+/// Features include:
+/// - Type-safe routing using `go_router_builder`.
+/// - Reactive redirection based on [AuthCubit] state.
+/// - Automatic navigation to the login page for protected routes.
 class AppRouter {
   AppRouter({required this.authCubit});
 
@@ -55,19 +67,26 @@ class AppRouter {
     redirect: (context, state) {
       final authState = authCubit.state;
       final location = state.matchedLocation;
+
+      // Identify if the target location is a public (unprotected) route.
       final isLoginRoute = location == const LoginRoute().location;
       final isRegisterRoute = location == const RegisterRoute().location;
       final isPublicRoute = isLoginRoute || isRegisterRoute;
 
       return authState.maybeWhen(
+        // If authorized, prevent access to public routes by redirecting to Home.
         authorized: (_) => isPublicRoute ? const HomeRoute().location : null,
+        // If not authorized, force redirection to Login for any non-public route.
         orElse: () => isPublicRoute ? null : const LoginRoute().location,
       );
     },
+    // Triggers a router refresh whenever the AuthCubit emits a new state.
     refreshListenable: _RefreshStream(authCubit.stream),
   );
 }
 
+/// A [ChangeNotifier] that triggers a refresh when the provided [stream] emits.
+/// Used to keep [GoRouter] in sync with external state managers like BLoC.
 class _RefreshStream extends ChangeNotifier {
   _RefreshStream(Stream<dynamic> stream) {
     notifyListeners();

@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 const double _kBorderRadius = 8;
 
+/// Centralized theme configuration for the application.
+///
+/// This class provides [ThemeData] for both light and dark modes,
+/// ensuring a consistent visual identity across the app.
 class AppTheme {
+  /// The light theme configuration for the application.
   static ThemeData get light {
     final colorScheme = ColorScheme.fromSeed(seedColor: Colors.blue);
     return ThemeData(
