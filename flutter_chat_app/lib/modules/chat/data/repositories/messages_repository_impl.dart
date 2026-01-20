@@ -37,14 +37,14 @@ class MessagesRepositoryImpl implements MessageRepository {
   }
 
   @override
-  Future<Result<Message>> getLastMessageByChatRoomId({
+  Future<Result<Message?>> getLastMessageByChatRoomId({
     required String chatRoomId,
   }) async {
     try {
       final message = await messageLocalDataSource.getLastMessageByChatRoomId(
         chatRoomId: chatRoomId,
       );
-      return Result.ok(message.toEntity());
+      return Result.ok(message?.toEntity());
     } on AppException catch (e) {
       return Result.error(e);
     } on Exception catch (e) {

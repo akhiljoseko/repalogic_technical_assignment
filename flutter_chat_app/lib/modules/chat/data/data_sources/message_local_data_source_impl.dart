@@ -28,10 +28,13 @@ class MessageLocalDataSourceImpl implements MessageLocalDataSource {
   }
 
   @override
-  Future<MessageModel> getLastMessageByChatRoomId({
+  Future<MessageModel?> getLastMessageByChatRoomId({
     required String chatRoomId,
   }) async {
     final messages = await getMessagesByChatRoomId(chatRoomId: chatRoomId);
+    if (messages.isEmpty) {
+      return null;
+    }
     return messages.last;
   }
 

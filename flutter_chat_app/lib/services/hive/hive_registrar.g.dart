@@ -2,17 +2,21 @@
 // Do not modify
 // Check in to version control
 
-import 'package:hive_ce/hive.dart';
 import 'package:flutter_chat_app/services/hive/hive_adapters.dart';
+import 'package:hive_ce/hive.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
+    registerAdapter(ChatRoomModelAdapter());
+    registerAdapter(MessageModelAdapter());
     registerAdapter(UserModelAdapter());
   }
 }
 
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
+    registerAdapter(ChatRoomModelAdapter());
+    registerAdapter(MessageModelAdapter());
     registerAdapter(UserModelAdapter());
   }
 }

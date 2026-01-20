@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_app/core/router/app_routes.dart';
 import 'package:flutter_chat_app/modules/chat/presentation/conversations/cubit/conversations_cubit.dart';
 
 class ConversationsCompactLayout extends StatelessWidget {
@@ -10,6 +11,12 @@ class ConversationsCompactLayout extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chats'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          const CreateChatRoomRoute().go(context);
+        },
+        child: const Icon(Icons.add),
       ),
       body: BlocBuilder<ConversationsCubit, ConversationsState>(
         builder: (context, state) {

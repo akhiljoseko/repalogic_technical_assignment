@@ -7,7 +7,7 @@ sealed class ChatRoom with _$ChatRoom {
   const factory ChatRoom({
     required String id,
     required String name,
-    @Default([]) List<String> participantIds,
     required DateTime createdAt,
+    @Default([]) List<String> participantIds,
   }) = _ChatRoom;
 }

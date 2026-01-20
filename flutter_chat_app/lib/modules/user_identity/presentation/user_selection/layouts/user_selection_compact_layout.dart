@@ -15,24 +15,26 @@ class UserSelectionCompactLayout extends StatelessWidget {
         title: const Text('Select User'),
       ),
       body: ScreenHorizontalPadding(
-        child: BlocBuilder<UserSelectionCubit, UserSelectionState>(
-          builder: (context, state) {
-            switch (state) {
-              case UsersLoading():
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              case UsersLoadSuccess():
-                return UsersList(users: state.users);
-              case UsersLoadError():
-                return Center(
-                  child: Text(state.error.localize(context.l10n)),
-                );
+        child: SafeArea(
+          child: BlocBuilder<UserSelectionCubit, UserSelectionState>(
+            builder: (context, state) {
+              switch (state) {
+                case UsersLoading():
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                case UsersLoadSuccess():
+                  return UsersList(users: state.users);
+                case UsersLoadError():
+                  return Center(
+                    child: Text(state.error.localize(context.l10n)),
+                  );
 
-              default:
-                return const SizedBox.shrink();
-            }
-          },
+                default:
+                  return const SizedBox.shrink();
+              }
+            },
+          ),
         ),
       ),
     );

@@ -13,7 +13,7 @@ abstract interface class MessageRepository {
     required String senderName,
   });
 
-  Future<Result<Message>> getLastMessageByChatRoomId({
+  Future<Result<Message?>> getLastMessageByChatRoomId({
     required String chatRoomId,
   });
 }

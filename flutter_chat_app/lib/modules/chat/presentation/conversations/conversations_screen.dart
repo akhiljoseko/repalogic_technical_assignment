@@ -10,6 +10,8 @@ import 'package:flutter_chat_app/shared/widgets/responsive_builder.dart';
 class ConversationsScreen extends StatelessWidget {
   const ConversationsScreen({super.key});
 
+  static const routeName = 'conversations';
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -17,7 +19,7 @@ class ConversationsScreen extends StatelessWidget {
         chatRoomsRepository: context.read<ChatRoomsRepository>(),
         messageRepository: context.read<MessageRepository>(),
         activeUserId: context.read<ActiveUserCubit>().state!.id,
-      ),
+      )..loadConversations(),
       child: ResponsiveBuilder(
         compactLayout: (_, _, _) => const ConversationsCompactLayout(),
       ),

@@ -8,8 +8,11 @@ part of 'app_routes.dart';
 
 List<RouteBase> get $appRoutes => [$userSelectionRoute, $conversationsRoute];
 
-RouteBase get $userSelectionRoute =>
-    GoRouteData.$route(path: '/', factory: $UserSelectionRoute._fromState);
+RouteBase get $userSelectionRoute => GoRouteData.$route(
+  path: '/',
+  name: 'user-selection',
+  factory: $UserSelectionRoute._fromState,
+);
 
 mixin $UserSelectionRoute on GoRouteData {
   static UserSelectionRoute _fromState(GoRouterState state) =>
@@ -34,7 +37,15 @@ mixin $UserSelectionRoute on GoRouteData {
 
 RouteBase get $conversationsRoute => GoRouteData.$route(
   path: '/conversations',
+  name: 'conversations',
   factory: $ConversationsRoute._fromState,
+  routes: [
+    GoRouteData.$route(
+      path: 'create-chat-room',
+      name: '/create-chat-room',
+      factory: $CreateChatRoomRoute._fromState,
+    ),
+  ],
 );
 
 mixin $ConversationsRoute on GoRouteData {
@@ -43,6 +54,28 @@ mixin $ConversationsRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/conversations');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin $CreateChatRoomRoute on GoRouteData {
+  static CreateChatRoomRoute _fromState(GoRouterState state) =>
+      const CreateChatRoomRoute();
+
+  @override
+  String get location =>
+      GoRouteData.$location('/conversations/create-chat-room');
 
   @override
   void go(BuildContext context) => context.go(location);

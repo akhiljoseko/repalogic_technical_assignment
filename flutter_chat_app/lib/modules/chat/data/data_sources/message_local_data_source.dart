@@ -8,7 +8,7 @@ abstract interface class MessageLocalDataSource {
     required String senderName,
   });
 
-  Future<MessageModel> getLastMessageByChatRoomId({
+  Future<MessageModel?> getLastMessageByChatRoomId({
     required String chatRoomId,
   });
 

@@ -60,18 +60,18 @@ class ConversationsCubit extends Cubit<ConversationsState> {
           );
 
       switch (lastMessageResult) {
-        case Ok<Message>():
+        case Ok<Message?>():
           final lastMessage = lastMessageResult.value;
           chatRoomSummaries.add(
             ChatRoomViewItemModel(
               roomId: chatRoom.id,
               roomName: chatRoom.name,
-              lastMessage: lastMessage.content,
-              lastMessageTime: lastMessage.timestamp,
-              lastMessageSenderName: lastMessage.senderId,
+              lastMessage: lastMessage?.content,
+              lastMessageTime: lastMessage?.timestamp,
+              lastMessageSenderName: lastMessage?.senderId,
             ),
           );
-        case Error<Message>():
+        case Error<Message?>():
           chatRoomSummaries.add(
             ChatRoomViewItemModel(
               roomId: chatRoom.id,
