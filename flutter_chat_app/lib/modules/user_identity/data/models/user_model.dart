@@ -14,6 +14,9 @@ sealed class UserModel with _$UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
+  factory UserModel.fromEntity(User user) =>
+      UserModel(id: user.id, name: user.name);
+
   UserModel._();
 
   User toEntity() => User(id: id, name: name);

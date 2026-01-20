@@ -11,4 +11,9 @@ class UsersLocalDataSourceImpl implements UsersLocalDataSource {
   Future<List<UserModel>> getUsers() async {
     return _usersDatabase.findAll();
   }
+
+  @override
+  Future<void> createUser(UserModel userModel) {
+    return _usersDatabase.insert(userModel.id, userModel);
+  }
 }
