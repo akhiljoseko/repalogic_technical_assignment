@@ -12,6 +12,28 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Stream<User?> get authStateChanges => _controller.stream;
 
   @override
+  Future<Result<User>> createAccount({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
+    try {
+      final user = User(id: '1', name: name, email: email);
+      _controller.add(user);
+      return Result.ok(user);
+    } on AppException catch (e) {
+      return Result.error(e);
+    } on Exception catch (e) {
+      return Result.error(
+        UnknownException(
+          errorCode: 'create-account-error',
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
   Future<Result<User>> loginWithPassword({
     required String email,
     required String password,
