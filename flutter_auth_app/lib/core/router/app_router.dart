@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/modules/authentication/cubit/auth_cubit.dart';
 import 'package:flutter_auth_app/modules/authentication/presentation/login/login_screen.dart';
+import 'package:flutter_auth_app/modules/authentication/presentation/register/register_screen.dart';
 import 'package:flutter_auth_app/modules/home/presentation/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +10,7 @@ part 'app_router.g.dart';
 
 @TypedGoRoute<HomeRoute>(
   path: '/',
+  name: HomeScreen.routeName,
 )
 class HomeRoute extends GoRouteData with $HomeRoute {
   const HomeRoute();
@@ -19,6 +21,7 @@ class HomeRoute extends GoRouteData with $HomeRoute {
 
 @TypedGoRoute<LoginRoute>(
   path: '/login',
+  name: LoginScreen.routeName,
 )
 class LoginRoute extends GoRouteData with $LoginRoute {
   const LoginRoute();
@@ -26,6 +29,18 @@ class LoginRoute extends GoRouteData with $LoginRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const LoginScreen();
+}
+
+@TypedGoRoute<RegisterRoute>(
+  path: '/register',
+  name: RegisterScreen.routeName,
+)
+class RegisterRoute extends GoRouteData with $RegisterRoute {
+  const RegisterRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const RegisterScreen();
 }
 
 class AppRouter {
@@ -39,12 +54,14 @@ class AppRouter {
     routes: $appRoutes,
     redirect: (context, state) {
       final authState = authCubit.state;
-      final bool loggingIn =
-          state.matchedLocation == const LoginRoute().location;
+      final location = state.matchedLocation;
+      final isLoginRoute = location == const LoginRoute().location;
+      final isRegisterRoute = location == const RegisterRoute().location;
+      final isPublicRoute = isLoginRoute || isRegisterRoute;
 
       return authState.maybeWhen(
-        authorized: (_) => loggingIn ? const HomeRoute().location : null,
-        orElse: () => loggingIn ? null : const LoginRoute().location,
+        authorized: (_) => isPublicRoute ? const HomeRoute().location : null,
+        orElse: () => isPublicRoute ? null : const LoginRoute().location,
       );
     },
     refreshListenable: _RefreshStream(authCubit.stream),
