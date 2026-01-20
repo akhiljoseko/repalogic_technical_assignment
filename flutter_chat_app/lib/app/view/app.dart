@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/counter/counter.dart';
 import 'package:flutter_chat_app/l10n/l10n.dart';
+import 'package:flutter_chat_app/modules/chat/presentation/conversations/conversations_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const ConversationsScreen(),
     );
   }
 }

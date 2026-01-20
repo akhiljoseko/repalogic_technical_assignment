@@ -1,7 +1,77 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+  "@@locale": "en",
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "description": "Label for the email input field"
+  },
+  "errInvalidCredentials": "Email or password is incorrect. Please try again.",
+  "@errInvalidCredentials": {
+    "description": "Error message for wrong login details"
+  },
+  "errInvalidEmail": "Invalid email format",
+  "@errInvalidEmail": {
+    "description": "Validation error for malformed email addresses"
+  },
+  "errInvalidFormat": "{fieldName} is invalid",
+  "@errInvalidFormat": {
+    "description": "Validation error for invalid input formats",
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
     }
+  },
+  "errInvalidPhone": "Invalid phone number",
+  "@errInvalidPhone": {
+    "description": "Validation error for malformed phone numers"
+  },
+  "errMaxLength": "{fieldName} must be at most {maxLength} characters long",
+  "@errMaxLength": {
+    "description": "Validation error for inputs that are too long",
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "maxLength": {
+        "type": "int"
+      }
+    }
+  },
+  "errMinLength": "{fieldName} must be at least {minLength} characters long",
+  "@errMinLength": {
+    "description": "Validation error for inputs that are too short",
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "minLength": {
+        "type": "int"
+      }
+    }
+  },
+  "errPhoneRequired": "Phone number is required",
+  "@errPhoneRequired": {
+    "description": "Validation error for missing phone number"
+  },
+  "errRequiredField": "{fieldName} is required",
+  "@errRequiredField": {
+    "description": "Validation error for empty required fields",
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "errUnknown": "An unknown error occurred. Please try again later.",
+  "@errUnknown": {
+    "description": "Generic unknown error message"
+  },
+  "snackTitleError": "Error",
+  "@snackTitleError": {
+    "description": "Title for error snack bars"
+  },
+  "snackTitleSuccess": "Success",
+  "@snackTitleSuccess": {
+    "description": "Title for success snack bars"
+  }
 }
