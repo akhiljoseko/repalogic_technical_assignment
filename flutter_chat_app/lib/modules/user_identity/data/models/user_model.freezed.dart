@@ -203,8 +203,8 @@ return $default(_that.id,_that.name);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _UserModel implements UserModel {
-  const _UserModel({required this.id, required this.name});
+class _UserModel extends UserModel {
+   _UserModel({required this.id, required this.name}): super._();
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
 @override final  String id;

@@ -1,0 +1,59 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'app_routes.dart';
+
+// **************************************************************************
+// GoRouterGenerator
+// **************************************************************************
+
+List<RouteBase> get $appRoutes => [$userSelectionRoute, $conversationsRoute];
+
+RouteBase get $userSelectionRoute =>
+    GoRouteData.$route(path: '/', factory: $UserSelectionRoute._fromState);
+
+mixin $UserSelectionRoute on GoRouteData {
+  static UserSelectionRoute _fromState(GoRouterState state) =>
+      const UserSelectionRoute();
+
+  @override
+  String get location => GoRouteData.$location('/');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $conversationsRoute => GoRouteData.$route(
+  path: '/conversations',
+  factory: $ConversationsRoute._fromState,
+);
+
+mixin $ConversationsRoute on GoRouteData {
+  static ConversationsRoute _fromState(GoRouterState state) =>
+      const ConversationsRoute();
+
+  @override
+  String get location => GoRouteData.$location('/conversations');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
