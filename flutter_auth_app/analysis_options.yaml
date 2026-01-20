@@ -3,6 +3,7 @@ analyzer:
   errors:
     one_member_abstracts: ignore
     discarded_futures: ignore
+    lines_longer_than_80_chars: ignore
   exclude:
     - lib/l10n/gen/*
 linter:

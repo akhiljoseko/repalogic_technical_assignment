@@ -4,7 +4,7 @@ import 'package:flutter_auth_app/core/theme/app_theme.dart';
 import 'package:flutter_auth_app/l10n/l10n.dart';
 import 'package:flutter_auth_app/modules/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/src/router.dart';
+import 'package:go_router/go_router.dart';
 
 class App extends StatefulWidget {
   const App({super.key});

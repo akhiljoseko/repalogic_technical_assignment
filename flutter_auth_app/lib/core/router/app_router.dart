@@ -85,7 +85,7 @@ class AppRouter {
   );
 }
 
-/// A [ChangeNotifier] that triggers a refresh when the provided [stream] emits.
+/// A [ChangeNotifier] that triggers a refresh when the provided [Stream] emits.
 /// Used to keep [GoRouter] in sync with external state managers like BLoC.
 class _RefreshStream extends ChangeNotifier {
   _RefreshStream(Stream<dynamic> stream) {

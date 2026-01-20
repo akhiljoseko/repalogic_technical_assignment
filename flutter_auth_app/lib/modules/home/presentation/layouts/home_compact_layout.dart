@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/utils/context_extensions.dart';
-import 'package:flutter_auth_app/modules/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:flutter_auth_app/l10n/l10n.dart';
 import 'package:flutter_auth_app/modules/authentication/domain/repositories/authentication_repository.dart';
+import 'package:flutter_auth_app/modules/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:flutter_auth_app/shared/widgets/primary_button.dart';
 import 'package:flutter_auth_app/shared/widgets/screen_padding.dart';
 import 'package:flutter_auth_app/shared/widgets/spacing.dart';
-import 'package:flutter_auth_app/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeCompactLayout extends StatelessWidget {
