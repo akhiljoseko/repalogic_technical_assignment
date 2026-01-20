@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/utils/context_extensions.dart';
+import 'package:flutter_auth_app/core/utils/form_validators.dart';
+import 'package:flutter_auth_app/l10n/l10n.dart';
 import 'package:flutter_auth_app/modules/authentication/presentation/register/cubit/register_cubit.dart';
 import 'package:flutter_auth_app/modules/authentication/presentation/widgets/question_text_button.dart';
 import 'package:flutter_auth_app/shared/widgets/email_text_field.dart';
@@ -43,6 +45,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
         children: [
           TextFormField(
             controller: _fullNameController,
+            validator: (value) => FormValidators.validateRequired(
+              value,
+              'Full Name',
+              context.l10n,
+            ),
             decoration: const InputDecoration(
               hintText: 'Full Name',
               helperText: '',
