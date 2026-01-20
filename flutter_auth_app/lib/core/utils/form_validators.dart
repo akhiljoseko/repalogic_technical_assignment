@@ -13,7 +13,7 @@ class FormValidators {
     AppLocalizations l10n,
   ) {
     if (value == null || value.trim().isEmpty) {
-      return '$fieldName is required';
+      return l10n.errRequiredField(fieldName);
     }
     return null;
   }
@@ -27,7 +27,7 @@ class FormValidators {
     AppLocalizations l10n,
   ) {
     if (value == null || value.trim().isEmpty) {
-      return 'Phone number is required';
+      return l10n.errPhoneRequired;
     }
 
     // Remove spaces and validate format
@@ -37,7 +37,7 @@ class FormValidators {
     final phoneRegex = RegExp(r'^\+?[0-9]{10,15}$');
 
     if (!phoneRegex.hasMatch(cleanedValue)) {
-      return 'Invalid phone number';
+      return l10n.errInvalidPhone;
     }
 
     return null;
@@ -51,7 +51,7 @@ class FormValidators {
     AppLocalizations l10n,
   ) {
     if (value == null || value.trim().isEmpty) {
-      return 'Email is required';
+      return l10n.errRequiredField(l10n.emailLabel);
     }
 
     // Email regex pattern
@@ -60,7 +60,7 @@ class FormValidators {
     );
 
     if (!emailRegex.hasMatch(value.trim())) {
-      return 'Invalid email format';
+      return l10n.errInvalidEmail;
     }
 
     return null;
@@ -76,11 +76,11 @@ class FormValidators {
     String? value,
   }) {
     if (value == null || value.isEmpty) {
-      return '$fieldName is required';
+      return l10n.errRequiredField(fieldName);
     }
 
     if (value.length < minLength) {
-      return '$fieldName must be at least $minLength characters long';
+      return l10n.errMinLength(fieldName, minLength);
     }
 
     return null;
@@ -96,7 +96,7 @@ class FormValidators {
     AppLocalizations l10n,
   ) {
     if (value != null && value.length > maxLength) {
-      return '$fieldName must be at most $maxLength characters long';
+      return l10n.errMaxLength(fieldName, maxLength);
     }
 
     return null;

@@ -66,12 +66,12 @@ class _LoginCompactLayoutState extends State<LoginCompactLayout> {
                         ),
                         const Vspace(50),
                         Text(
-                          'Welcome to Repalogic',
+                          context.l10n.loginWelcomeTitle,
                           style: context.textTheme.titleLarge,
                         ),
                         const Vspace(12),
                         Text(
-                          'Login to continue',
+                          context.l10n.loginContinueSubtitle,
                           style: context.textTheme.titleMedium,
                         ),
                         const Vspace(16),
@@ -95,14 +95,14 @@ class _LoginCompactLayoutState extends State<LoginCompactLayout> {
                                 password: _passwordController.text.trim(),
                               );
                             },
-                            buttonLabel: 'Sign in',
+                            buttonLabel: context.l10n.loginSignInButton,
                           ),
                         ),
                         QuestionTextButton(
                           onPressed: () =>
                               context.push(const RegisterRoute().location),
-                          question: "Don't have an account? ",
-                          buttonLabel: 'Sign up',
+                          question: context.l10n.loginNoAccountQuestion,
+                          buttonLabel: context.l10n.loginSignUpButton,
                         ),
                       ],
                     ),

@@ -35,6 +35,6 @@ final class UnknownException extends AppException {
 
   @override
   String localize(AppLocalizations l10n) {
-    return 'An unknown error';
+    return l10n.errUnknown;
   }
 }

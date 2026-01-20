@@ -14,8 +14,8 @@ class EmailTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      decoration: const InputDecoration(
-        hintText: 'Email',
+      decoration: InputDecoration(
+        hintText: context.l10n.emailLabel,
         helperText: '',
       ),
       validator: (value) => FormValidators.validateEmail(value, context.l10n),

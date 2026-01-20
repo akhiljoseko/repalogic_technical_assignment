@@ -47,11 +47,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
             controller: _fullNameController,
             validator: (value) => FormValidators.validateRequired(
               value,
-              'Full Name',
+              context.l10n.fullNameLabel,
               context.l10n,
             ),
-            decoration: const InputDecoration(
-              hintText: 'Full Name',
+            decoration: InputDecoration(
+              hintText: context.l10n.fullNameLabel,
               helperText: '',
             ),
           ),
@@ -67,11 +67,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
-              text: 'By creating an account, you agree to our ',
+              text: context.l10n.registerTermsAgreement,
               style: context.textTheme.bodyMedium,
               children: [
                 TextSpan(
-                  text: '\nTerms and Conditions',
+                  text: context.l10n.registerTermsAndConditions,
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: context.colorScheme.primary,
                     fontWeight: FontWeight.bold,
@@ -95,12 +95,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 password: _passwordController.text,
               );
             },
-            buttonLabel: 'Create Account',
+            buttonLabel: context.l10n.registerCreateAccountTitle,
           ),
           QuestionTextButton(
             onPressed: () => context.pop(),
-            question: 'Already have an account? ',
-            buttonLabel: 'Sign in',
+            question: context.l10n.loginAlreadyHaveAccountQuestion,
+            buttonLabel: context.l10n.loginSignInButton,
           ),
         ],
       ),

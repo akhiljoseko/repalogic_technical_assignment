@@ -5,6 +5,7 @@ import 'package:flutter_auth_app/modules/authentication/domain/repositories/auth
 import 'package:flutter_auth_app/shared/widgets/primary_button.dart';
 import 'package:flutter_auth_app/shared/widgets/screen_padding.dart';
 import 'package:flutter_auth_app/shared/widgets/spacing.dart';
+import 'package:flutter_auth_app/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeCompactLayout extends StatelessWidget {
@@ -14,7 +15,7 @@ class HomeCompactLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Text(context.l10n.homeAppBarTitle),
       ),
       body: Center(
         child: BlocBuilder<AuthCubit, AuthState>(
@@ -43,7 +44,7 @@ class HomeCompactLayout extends StatelessWidget {
                   PrimaryButton(
                     onPressed: () =>
                         context.read<AuthenticationRepository>().logout(),
-                    buttonLabel: 'Sign out',
+                    buttonLabel: context.l10n.homeSignOutButton,
                   ),
                 ],
               ),

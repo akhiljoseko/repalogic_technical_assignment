@@ -22,7 +22,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
     return TextFormField(
       controller: widget.controller,
       decoration: InputDecoration(
-        hintText: 'Password',
+        hintText: context.l10n.passwordLabel,
         helperText: '',
         suffixIcon: IconButton(
           icon: Icon(
@@ -38,7 +38,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       validator: (value) => FormValidators.validateMinLength(
         value: value,
         minLength: 8,
-        fieldName: 'Password',
+        fieldName: context.l10n.passwordLabel,
         l10n: context.l10n,
       ),
       obscureText: _isObscured,

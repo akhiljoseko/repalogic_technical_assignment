@@ -1,7 +1,146 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+  "@@locale": "en",
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "description": "Label for the email input field"
+  },
+  "errInvalidCredentials": "Email or password is incorrect. Please try again.",
+  "@errInvalidCredentials": {
+    "description": "Error message for wrong login details"
+  },
+  "errInvalidEmail": "Invalid email format",
+  "@errInvalidEmail": {
+    "description": "Validation error for malformed email addresses"
+  },
+  "errInvalidFormat": "{fieldName} is invalid",
+  "@errInvalidFormat": {
+    "description": "Validation error for invalid input formats",
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
     }
+  },
+  "errInvalidPhone": "Invalid phone number",
+  "@errInvalidPhone": {
+    "description": "Validation error for malformed phone numers"
+  },
+  "errMaxLength": "{fieldName} must be at most {maxLength} characters long",
+  "@errMaxLength": {
+    "description": "Validation error for inputs that are too long",
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "maxLength": {
+        "type": "int"
+      }
+    }
+  },
+  "errMinLength": "{fieldName} must be at least {minLength} characters long",
+  "@errMinLength": {
+    "description": "Validation error for inputs that are too short",
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "minLength": {
+        "type": "int"
+      }
+    }
+  },
+  "errPhoneRequired": "Phone number is required",
+  "@errPhoneRequired": {
+    "description": "Validation error for missing phone number"
+  },
+  "errRequiredField": "{fieldName} is required",
+  "@errRequiredField": {
+    "description": "Validation error for empty required fields",
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "errUnknown": "An unknown error occurred. Please try again later.",
+  "@errUnknown": {
+    "description": "Generic unknown error message"
+  },
+  "errUserAlreadyExists": "A user with this email already exists. Please use a different email.",
+  "@errUserAlreadyExists": {
+    "description": "Error message when email is already taken"
+  },
+  "fullNameLabel": "Full Name",
+  "@fullNameLabel": {
+    "description": "Label for the full name input field"
+  },
+  "homeAppBarTitle": "Home",
+  "@homeAppBarTitle": {
+    "description": "Title shown in the AppBar of the Home screen"
+  },
+  "homeSignOutButton": "Sign out",
+  "@homeSignOutButton": {
+    "description": "Label for the sign out button"
+  },
+  "homeWelcomeTitle": "Welcome, {name}!",
+  "@homeWelcomeTitle": {
+    "description": "Welcome message on the home screen",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "loginAlreadyHaveAccountQuestion": "Already have an account? ",
+  "@loginAlreadyHaveAccountQuestion": {
+    "description": "Question shown on registration screen to go to login"
+  },
+  "loginContinueSubtitle": "Login to continue",
+  "@loginContinueSubtitle": {
+    "description": "Subtitle on the login screen"
+  },
+  "loginNoAccountQuestion": "Don't have an account? ",
+  "@loginNoAccountQuestion": {
+    "description": "Question shown above the sign up button"
+  },
+  "loginSignInButton": "Sign in",
+  "@loginSignInButton": {
+    "description": "Label for the sign in button"
+  },
+  "loginSignUpButton": "Sign up",
+  "@loginSignUpButton": {
+    "description": "Label for the sign up button"
+  },
+  "loginWelcomeTitle": "Welcome to Repalogic",
+  "@loginWelcomeTitle": {
+    "description": "Introduction title on the login screen"
+  },
+  "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Label for the password input field"
+  },
+  "registerCreateAccountTitle": "Create Account",
+  "@registerCreateAccountTitle": {
+    "description": "Title on the registration screen"
+  },
+  "registerSuccessMessage": "Account created successfully",
+  "@registerSuccessMessage": {
+    "description": "Success message after registration"
+  },
+  "registerTermsAgreement": "By creating an account, you agree to our ",
+  "@registerTermsAgreement": {
+    "description": "Agreement text prefix on registration screen"
+  },
+  "registerTermsAndConditions": "Terms and Conditions",
+  "@registerTermsAndConditions": {
+    "description": "Terms and Conditions link text"
+  },
+  "snackTitleError": "Error",
+  "@snackTitleError": {
+    "description": "Title for error snack bars"
+  },
+  "snackTitleSuccess": "Success",
+  "@snackTitleSuccess": {
+    "description": "Title for success snack bars"
+  }
 }

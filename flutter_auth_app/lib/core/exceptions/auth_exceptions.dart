@@ -10,7 +10,7 @@ class UserAlreadyExistsException extends AppException {
 
   @override
   String localize(AppLocalizations l10n) {
-    return 'User already exists';
+    return l10n.errUserAlreadyExists;
   }
 }
 
@@ -23,19 +23,6 @@ class InvalidCredentialsException extends AppException {
 
   @override
   String localize(AppLocalizations l10n) {
-    return 'Invalid credentials';
-  }
-}
-
-/// Thrown during login if no user is found with the provided email.
-class UserNotFoundException extends AppException {
-  UserNotFoundException({
-    super.errorCode = 'user_not_found',
-    super.errorMessage = 'User not found',
-  });
-
-  @override
-  String localize(AppLocalizations l10n) {
-    return 'User not found';
+    return l10n.errInvalidCredentials;
   }
 }

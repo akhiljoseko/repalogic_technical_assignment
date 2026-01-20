@@ -78,7 +78,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       // 1. Fetch the user details from the local data source.
       final userModel = await localDataSource.getUser(email: email);
       if (userModel == null) {
-        return Result.error(UserNotFoundException());
+        return Result.error(InvalidCredentialsException());
       }
 
       // 2. Encrypt the provided password for comparison with the stored hash/obfuscated string.

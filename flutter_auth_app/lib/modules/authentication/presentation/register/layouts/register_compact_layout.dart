@@ -20,7 +20,7 @@ class RegisterCompactLayout extends StatelessWidget {
         if (state is RegisterSuccess) {
           SnackbarUtils.showSuccessSnackBar(
             context,
-            content: 'Account created successfully',
+            content: context.l10n.registerSuccessMessage,
           );
           return;
         }
@@ -44,7 +44,7 @@ class RegisterCompactLayout extends StatelessWidget {
                       SvgPicture.asset(Assets.svg.repalogicLogo.path),
                       const Vspace(24),
                       Text(
-                        'Create Account',
+                        context.l10n.registerCreateAccountTitle,
                         style: context.textTheme.headlineMedium,
                       ),
                       const Vspace(24),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/utils/context_extensions.dart';
+import 'package:flutter_auth_app/l10n/l10n.dart';
 
 abstract class SnackbarUtils {
   static void showSuccessSnackBar(
     BuildContext context, {
-    String title = 'Success',
+    String? title,
     String? content,
   }) {
+    final effectiveTitle = title ?? context.l10n.snackTitleSuccess;
     const bgColor = Colors.green;
     const textColor = Colors.white;
     final snackBar = SnackBar(
@@ -19,7 +21,7 @@ abstract class SnackbarUtils {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title,
+            effectiveTitle,
             style: context.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.w700,
               color: textColor,
@@ -42,9 +44,10 @@ abstract class SnackbarUtils {
 
   static void showErrorSnackBar(
     BuildContext context, {
-    String title = 'Error',
+    String? title,
     String? content,
   }) {
+    final effectiveTitle = title ?? context.l10n.snackTitleError;
     final snackBar = SnackBar(
       backgroundColor: context.colorScheme.errorContainer,
       shape: RoundedRectangleBorder(
@@ -55,7 +58,7 @@ abstract class SnackbarUtils {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title,
+            effectiveTitle,
             style: context.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.w700,
               color: context.colorScheme.onErrorContainer,
