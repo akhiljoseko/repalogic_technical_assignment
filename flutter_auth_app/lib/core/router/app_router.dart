@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_app/modules/authentication/cubit/auth_cubit.dart';
+import 'package:flutter_auth_app/modules/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:flutter_auth_app/modules/authentication/presentation/login/login_screen.dart';
 import 'package:flutter_auth_app/modules/authentication/presentation/register/register_screen.dart';
 import 'package:flutter_auth_app/modules/home/presentation/home_screen.dart';
