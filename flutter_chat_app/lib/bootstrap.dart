@@ -3,6 +3,10 @@ import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_app/modules/chat/data/repositories/chat_rooms_repository_impl.dart';
+import 'package:flutter_chat_app/modules/chat/data/repositories/messages_repository_impl.dart';
+import 'package:flutter_chat_app/modules/chat/domain/repositories/chat_rooms_repository.dart';
+import 'package:flutter_chat_app/modules/chat/domain/repositories/message_repository.dart';
 import 'package:flutter_chat_app/modules/user_identity/data/data_sources/users_local_data_source_impl.dart';
 import 'package:flutter_chat_app/modules/user_identity/data/models/user_model.dart';
 import 'package:flutter_chat_app/modules/user_identity/data/repositories/users_repository_impl.dart';
@@ -33,6 +37,12 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
       providers: [
         RepositoryProvider<UsersRepository>.value(
           value: usersRepository,
+        ),
+        RepositoryProvider<ChatRoomsRepository>(
+          create: (_) => ChatRoomsRepositoryImpl(),
+        ),
+        RepositoryProvider<MessageRepository>(
+          create: (_) => MessagesRepositoryImpl(),
         ),
       ],
       child: BlocProvider(
