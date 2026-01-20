@@ -205,8 +205,8 @@ return $default(_that.id,_that.name,_that.email,_that.encryptedPassword);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _UserModel implements UserModel {
-   _UserModel({required this.id, required this.name, required this.email, required this.encryptedPassword});
+class _UserModel extends UserModel {
+   _UserModel({required this.id, required this.name, required this.email, required this.encryptedPassword}): super._();
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
 @override final  String id;
