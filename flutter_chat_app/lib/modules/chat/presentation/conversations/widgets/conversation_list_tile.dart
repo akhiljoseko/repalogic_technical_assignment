@@ -17,6 +17,13 @@ class ConversationListTile extends StatelessWidget {
       leading: const CircleAvatar(child: Icon(Icons.group_rounded)),
       onTap: onPressed,
       title: Text(conversation.roomName),
+      subtitle: conversation.lastMessage != null
+          ? Text(
+              '${conversation.lastMessageSenderName}: ${conversation.lastMessage}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            )
+          : null,
     );
   }
 }

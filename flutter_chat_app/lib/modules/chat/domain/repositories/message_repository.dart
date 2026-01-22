@@ -16,4 +16,6 @@ abstract interface class MessageRepository {
   Future<Result<Message?>> getLastMessageByChatRoomId({
     required String chatRoomId,
   });
+
+  Stream<void> watchMessages();
 }

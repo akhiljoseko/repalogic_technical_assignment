@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter_chat_app/core/exceptions/app_exception.dart';
 import 'package:flutter_chat_app/core/utils/result.dart';
 import 'package:flutter_chat_app/modules/chat/data/data_sources/chat_room_local_data_source.dart';
@@ -8,6 +9,10 @@ class ChatRoomsRepositoryImpl implements ChatRoomsRepository {
   ChatRoomsRepositoryImpl({required this.chatRoomLocalDataSource});
 
   final ChatRoomLocalDataSource chatRoomLocalDataSource;
+  final _chatRoomsStreamController = StreamController<void>.broadcast();
+
+  @override
+  Stream<void> watchChatRooms() => _chatRoomsStreamController.stream;
 
   @override
   Future<Result<ChatRoom>> createChatRoom({
@@ -19,6 +24,7 @@ class ChatRoomsRepositoryImpl implements ChatRoomsRepository {
         roomName: roomName,
         participantIds: participantIds,
       );
+      _chatRoomsStreamController.add(null);
       return Result.ok(chatRoomModel.toEntity());
     } on AppException catch (e) {
       return Result.error(e);

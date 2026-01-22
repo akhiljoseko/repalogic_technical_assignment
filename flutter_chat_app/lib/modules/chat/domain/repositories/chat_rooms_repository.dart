@@ -10,4 +10,6 @@ abstract interface class ChatRoomsRepository {
     required String roomName,
     required List<String> participantIds,
   });
+
+  Stream<void> watchChatRooms();
 }

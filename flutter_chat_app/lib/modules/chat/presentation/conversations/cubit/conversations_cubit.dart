@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_chat_app/core/exceptions/app_exception.dart';
 import 'package:flutter_chat_app/core/utils/result.dart';
@@ -19,11 +20,28 @@ class ConversationsCubit extends Cubit<ConversationsState> {
   }) : _chatRoomsRepository = chatRoomsRepository,
        _messageRepository = messageRepository,
        _activeUserId = activeUserId,
-       super(const ConversationsState.initial());
+       super(const ConversationsState.initial()) {
+    _chatRoomsSubscription = _chatRoomsRepository.watchChatRooms().listen((_) {
+      loadConversations();
+    });
+    _messagesSubscription = _messageRepository.watchMessages().listen((_) {
+      loadConversations();
+    });
+  }
 
   final ChatRoomsRepository _chatRoomsRepository;
   final MessageRepository _messageRepository;
   final String _activeUserId;
+
+  StreamSubscription<void>? _chatRoomsSubscription;
+  StreamSubscription<void>? _messagesSubscription;
+
+  @override
+  Future<void> close() {
+    _chatRoomsSubscription?.cancel();
+    _messagesSubscription?.cancel();
+    return super.close();
+  }
 
   Future<void> loadConversations() async {
     emit(const ConversationsState.loading());
@@ -36,6 +54,18 @@ class ConversationsCubit extends Cubit<ConversationsState> {
       case Ok<List<ChatRoom>>():
         final chatRooms = chatRoomsResult.value;
         final chatRoomSummaries = await _getRoomSummary(chatRooms);
+
+        // Sort by lastMessageTime descending, if not available, use createdAt
+        chatRoomSummaries.sort((a, b) {
+          final timeA =
+              a.lastMessageTime ??
+              chatRooms.firstWhere((r) => r.id == a.roomId).createdAt;
+          final timeB =
+              b.lastMessageTime ??
+              chatRooms.firstWhere((r) => r.id == b.roomId).createdAt;
+          return timeB.compareTo(timeA);
+        });
+
         emit(ConversationsState.success(chatRoomSummaries));
       case Error<List<ChatRoom>>():
         emit(ConversationsState.error(chatRoomsResult.error));
@@ -62,7 +92,7 @@ class ConversationsCubit extends Cubit<ConversationsState> {
               roomName: chatRoom.name,
               lastMessage: lastMessage?.content,
               lastMessageTime: lastMessage?.timestamp,
-              lastMessageSenderName: lastMessage?.senderId,
+              lastMessageSenderName: lastMessage?.senderName,
             ),
           );
         case Error<Message?>():

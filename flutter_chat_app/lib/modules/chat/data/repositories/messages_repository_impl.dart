@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter_chat_app/core/exceptions/app_exception.dart';
 import 'package:flutter_chat_app/core/utils/result.dart';
 import 'package:flutter_chat_app/modules/chat/data/data_sources/message_local_data_source.dart';
@@ -8,6 +9,10 @@ class MessagesRepositoryImpl implements MessageRepository {
   MessagesRepositoryImpl({required this.messageLocalDataSource});
 
   final MessageLocalDataSource messageLocalDataSource;
+  final _messagesStreamController = StreamController<void>.broadcast();
+
+  @override
+  Stream<void> watchMessages() => _messagesStreamController.stream;
 
   @override
   Future<Result<Message>> createMessage({
@@ -23,6 +28,7 @@ class MessagesRepositoryImpl implements MessageRepository {
         senderId: senderId,
         senderName: senderName,
       );
+      _messagesStreamController.add(null);
       return Result.ok(message.toEntity());
     } on AppException catch (e) {
       return Result.error(e);
