@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/core/utils/context_extensions.dart';
 
+/// A standardized primary button using the app's primary color theme.
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({required this.buttonLabel, this.onPressed, super.key});
 

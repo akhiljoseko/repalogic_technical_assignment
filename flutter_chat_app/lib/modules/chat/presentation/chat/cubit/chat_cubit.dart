@@ -23,6 +23,7 @@ class ChatCubit extends Cubit<ChatState> {
 
   Future<void> loadMessages() async {
     emit(const ChatState.loading());
+    // Fetch messages for the current chat room from the repository.
     final result = await _messageRepository.getMessagesByChatRoomId(
       chatRoomId: _chatRoomId,
     );
@@ -44,8 +45,10 @@ class ChatCubit extends Cubit<ChatState> {
       orElse: () => <Message>[],
     );
 
+    // Optimistically update the UI (optional, handling loading state here)
     emit(ChatState.sending(currentMessages));
 
+    // Send the message to the backend/local source.
     final result = await _messageRepository.createMessage(
       chatRoomId: _chatRoomId,
       content: content,

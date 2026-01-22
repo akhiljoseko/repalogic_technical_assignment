@@ -9,6 +9,9 @@ class MessagesRepositoryImpl implements MessageRepository {
   MessagesRepositoryImpl({required this.messageLocalDataSource});
 
   final MessageLocalDataSource messageLocalDataSource;
+
+  // Stream controller to broadcast events when new messages are added.
+  // This allows the UI (chat screen, conversation list) to react to new messages in real-time.
   final _messagesStreamController = StreamController<void>.broadcast();
 
   @override
@@ -28,6 +31,8 @@ class MessagesRepositoryImpl implements MessageRepository {
         senderId: senderId,
         senderName: senderName,
       );
+      // Notify listeners that a new message has been created.
+      // This triggers listeners (like ConversationsCubit) to refresh data.
       _messagesStreamController.add(null);
       return Result.ok(message.toEntity());
     } on AppException catch (e) {

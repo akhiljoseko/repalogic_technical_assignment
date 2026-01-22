@@ -21,9 +21,14 @@ class ConversationsCubit extends Cubit<ConversationsState> {
        _messageRepository = messageRepository,
        _activeUserId = activeUserId,
        super(const ConversationsState.initial()) {
+    // Listen to changes in chat rooms (e.g., new room created)
+    // and reload the conversation list to keep UI in sync.
     _chatRoomsSubscription = _chatRoomsRepository.watchChatRooms().listen((_) {
       loadConversations();
     });
+
+    // Listen to new messages to update the last message preview
+    // and re-sort the conversation list.
     _messagesSubscription = _messageRepository.watchMessages().listen((_) {
       loadConversations();
     });
@@ -55,7 +60,10 @@ class ConversationsCubit extends Cubit<ConversationsState> {
         final chatRooms = chatRoomsResult.value;
         final chatRoomSummaries = await _getRoomSummary(chatRooms);
 
-        // Sort by lastMessageTime descending, if not available, use createdAt
+        // Sort by lastMessageTime descending.
+        // If a room has no messages, fall back to the room's creation time.
+        // This ensures that the most recent activity (message or creation)
+        // appears at the top of the list.
         chatRoomSummaries.sort((a, b) {
           final timeA =
               a.lastMessageTime ??

@@ -10,6 +10,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'create_chat_room_state.dart';
 part 'create_chat_room_cubit.freezed.dart';
 
+/// Manages the state and logic for creating a new chat room.
+///
+/// Handles:
+/// 1. Importing the list of users for selection.
+/// 2. Managing the set of selected participants.
+/// 3. Creating the chat room via [ChatRoomsRepository].
 class CreateChatRoomCubit extends Cubit<CreateChatRoomState> {
   CreateChatRoomCubit({
     required UsersRepository usersRepository,
@@ -26,6 +32,10 @@ class CreateChatRoomCubit extends Cubit<CreateChatRoomState> {
   final ChatRoomsRepository _chatRoomsRepository;
   final String _activeUserId;
 
+  /// Loads the initial list of users from the repository.
+  ///
+  /// The current active user is filtered out of the list so they cannot
+  /// select themselves.
   Future<void> loadInitialData() async {
     emit(const CreateChatRoomState.loadingInitialData());
     final usersResult = await _usersRepository.getUsers();
@@ -43,6 +53,10 @@ class CreateChatRoomCubit extends Cubit<CreateChatRoomState> {
     }
   }
 
+  /// Creates a new chat room with the given [roomName] and the currently
+  /// selected users.
+  ///
+  /// The active user is automatically added to the participants list.
   Future<void> createChatRoom({required String roomName}) async {
     if (state is! CreateChatRoomStateLoadingInitialDataSuccess) return;
 
@@ -66,6 +80,9 @@ class CreateChatRoomCubit extends Cubit<CreateChatRoomState> {
     }
   }
 
+  /// Toggles the selection state of a [user].
+  ///
+  /// [selected] determines whether the user is being added or removed.
   void toggleUserSelection({required User user, required bool selected}) {
     if (state is! CreateChatRoomStateLoadingInitialDataSuccess) return;
 

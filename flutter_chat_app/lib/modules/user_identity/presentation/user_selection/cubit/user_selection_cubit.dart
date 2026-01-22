@@ -8,6 +8,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_selection_state.dart';
 part 'user_selection_cubit.freezed.dart';
 
+/// Manages the state of the user selection screen.
+///
+/// Responsible for fetching the list of available users from the [UsersRepository].
 class UserSelectionCubit extends Cubit<UserSelectionState> {
   UserSelectionCubit({required UsersRepository usersRepository})
     : _usersRepository = usersRepository,
@@ -15,6 +18,8 @@ class UserSelectionCubit extends Cubit<UserSelectionState> {
 
   final UsersRepository _usersRepository;
 
+  /// Fetches the list of users and emits [UserSelectionState.loaded] on success,
+  /// or [UserSelectionState.error] on failure.
   Future<void> loadUsers() async {
     emit(const UserSelectionState.loading());
 

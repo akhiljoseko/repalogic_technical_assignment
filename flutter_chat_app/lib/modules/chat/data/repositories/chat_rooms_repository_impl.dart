@@ -9,6 +9,10 @@ class ChatRoomsRepositoryImpl implements ChatRoomsRepository {
   ChatRoomsRepositoryImpl({required this.chatRoomLocalDataSource});
 
   final ChatRoomLocalDataSource chatRoomLocalDataSource;
+
+  // Stream controller to broadcast events when the chat rooms list changes.
+  // We use a broadcast stream so multiple listeners (e.g., different UI parts)
+  // can subscribe to updates simultaneously.
   final _chatRoomsStreamController = StreamController<void>.broadcast();
 
   @override
@@ -24,6 +28,8 @@ class ChatRoomsRepositoryImpl implements ChatRoomsRepository {
         roomName: roomName,
         participantIds: participantIds,
       );
+      // Notify listeners that a new chat room has been created.
+      // This triggers the UI to refresh the list.
       _chatRoomsStreamController.add(null);
       return Result.ok(chatRoomModel.toEntity());
     } on AppException catch (e) {
