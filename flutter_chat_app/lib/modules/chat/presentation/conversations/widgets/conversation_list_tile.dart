@@ -19,6 +19,8 @@ class ConversationListTile extends StatelessWidget {
       title: Text(conversation.roomName),
       subtitle: conversation.lastMessage != null
           ? Text(
+              //
+              // ignore: lines_longer_than_80_chars
               '${conversation.lastMessageSenderName}: ${conversation.lastMessage}',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

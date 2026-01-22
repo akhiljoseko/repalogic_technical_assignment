@@ -59,6 +59,8 @@ class ChatBubble extends StatelessWidget {
   }
 
   String _formatTime(DateTime timestamp) {
+    //
+    // ignore: lines_longer_than_80_chars
     return '${timestamp.hour.toString().padLeft(2, '0')}:${timestamp.minute.toString().padLeft(2, '0')}';
   }
 }

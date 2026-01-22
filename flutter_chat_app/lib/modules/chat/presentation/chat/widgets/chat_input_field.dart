@@ -32,7 +32,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       color: Colors.white,
       child: Row(
         children: [
@@ -42,7 +42,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
               decoration: const InputDecoration(
                 hintText: 'Type a message...',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(24.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(24)),
                 ),
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 16,
