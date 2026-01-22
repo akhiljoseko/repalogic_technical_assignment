@@ -64,21 +64,20 @@ class _CreateChatRoomCompactLayoutState
                         itemCount: state.users.length,
                         itemBuilder: (context, index) {
                           final user = state.users[index];
-                          return ListTile(
+                          return CheckboxListTile(
                             title: Text(user.name),
-                            trailing: Checkbox(
-                              value: state.selectedUsers.contains(
-                                user,
-                              ),
-                              onChanged: (value) {
-                                context
-                                    .read<CreateChatRoomCubit>()
-                                    .toggleUserSelection(
-                                      user: user,
-                                      selected: value ?? false,
-                                    );
-                              },
+
+                            value: state.selectedUsers.contains(
+                              user,
                             ),
+                            onChanged: (value) {
+                              context
+                                  .read<CreateChatRoomCubit>()
+                                  .toggleUserSelection(
+                                    user: user,
+                                    selected: value ?? false,
+                                  );
+                            },
                           );
                         },
                       );

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatRoom {
 
- String get id; String get name; List<String> get participantIds; DateTime get createdAt;
+ String get id; String get name; DateTime get createdAt; List<String> get participantIds;
 /// Create a copy of ChatRoom
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ChatRoomCopyWith<ChatRoom> get copyWith => _$ChatRoomCopyWithImpl<ChatRoom>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatRoom&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.participantIds, participantIds)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatRoom&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other.participantIds, participantIds));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(participantIds),createdAt);
+int get hashCode => Object.hash(runtimeType,id,name,createdAt,const DeepCollectionEquality().hash(participantIds));
 
 @override
 String toString() {
-  return 'ChatRoom(id: $id, name: $name, participantIds: $participantIds, createdAt: $createdAt)';
+  return 'ChatRoom(id: $id, name: $name, createdAt: $createdAt, participantIds: $participantIds)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ChatRoomCopyWith<$Res>  {
   factory $ChatRoomCopyWith(ChatRoom value, $Res Function(ChatRoom) _then) = _$ChatRoomCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, List<String> participantIds, DateTime createdAt
+ String id, String name, DateTime createdAt, List<String> participantIds
 });
 
 
@@ -62,13 +62,13 @@ class _$ChatRoomCopyWithImpl<$Res>
 
 /// Create a copy of ChatRoom
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? participantIds = null,Object? createdAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? createdAt = null,Object? participantIds = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,participantIds: null == participantIds ? _self.participantIds : participantIds // ignore: cast_nullable_to_non_nullable
-as List<String>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime,
+as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,participantIds: null == participantIds ? _self.participantIds : participantIds // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
@@ -150,10 +150,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  List<String> participantIds,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  DateTime createdAt,  List<String> participantIds)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ChatRoom() when $default != null:
-return $default(_that.id,_that.name,_that.participantIds,_that.createdAt);case _:
+return $default(_that.id,_that.name,_that.createdAt,_that.participantIds);case _:
   return orElse();
 
 }
@@ -171,10 +171,10 @@ return $default(_that.id,_that.name,_that.participantIds,_that.createdAt);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  List<String> participantIds,  DateTime createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  DateTime createdAt,  List<String> participantIds)  $default,) {final _that = this;
 switch (_that) {
 case _ChatRoom():
-return $default(_that.id,_that.name,_that.participantIds,_that.createdAt);}
+return $default(_that.id,_that.name,_that.createdAt,_that.participantIds);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -188,10 +188,10 @@ return $default(_that.id,_that.name,_that.participantIds,_that.createdAt);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  List<String> participantIds,  DateTime createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  DateTime createdAt,  List<String> participantIds)?  $default,) {final _that = this;
 switch (_that) {
 case _ChatRoom() when $default != null:
-return $default(_that.id,_that.name,_that.participantIds,_that.createdAt);case _:
+return $default(_that.id,_that.name,_that.createdAt,_that.participantIds);case _:
   return null;
 
 }
@@ -203,11 +203,12 @@ return $default(_that.id,_that.name,_that.participantIds,_that.createdAt);case _
 
 
 class _ChatRoom implements ChatRoom {
-  const _ChatRoom({required this.id, required this.name, final  List<String> participantIds = const [], required this.createdAt}): _participantIds = participantIds;
+  const _ChatRoom({required this.id, required this.name, required this.createdAt, final  List<String> participantIds = const []}): _participantIds = participantIds;
   
 
 @override final  String id;
 @override final  String name;
+@override final  DateTime createdAt;
  final  List<String> _participantIds;
 @override@JsonKey() List<String> get participantIds {
   if (_participantIds is EqualUnmodifiableListView) return _participantIds;
@@ -215,7 +216,6 @@ class _ChatRoom implements ChatRoom {
   return EqualUnmodifiableListView(_participantIds);
 }
 
-@override final  DateTime createdAt;
 
 /// Create a copy of ChatRoom
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +227,16 @@ _$ChatRoomCopyWith<_ChatRoom> get copyWith => __$ChatRoomCopyWithImpl<_ChatRoom>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatRoom&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._participantIds, _participantIds)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatRoom&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other._participantIds, _participantIds));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(_participantIds),createdAt);
+int get hashCode => Object.hash(runtimeType,id,name,createdAt,const DeepCollectionEquality().hash(_participantIds));
 
 @override
 String toString() {
-  return 'ChatRoom(id: $id, name: $name, participantIds: $participantIds, createdAt: $createdAt)';
+  return 'ChatRoom(id: $id, name: $name, createdAt: $createdAt, participantIds: $participantIds)';
 }
 
 
@@ -247,7 +247,7 @@ abstract mixin class _$ChatRoomCopyWith<$Res> implements $ChatRoomCopyWith<$Res>
   factory _$ChatRoomCopyWith(_ChatRoom value, $Res Function(_ChatRoom) _then) = __$ChatRoomCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, List<String> participantIds, DateTime createdAt
+ String id, String name, DateTime createdAt, List<String> participantIds
 });
 
 
@@ -264,13 +264,13 @@ class __$ChatRoomCopyWithImpl<$Res>
 
 /// Create a copy of ChatRoom
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? participantIds = null,Object? createdAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? createdAt = null,Object? participantIds = null,}) {
   return _then(_ChatRoom(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,participantIds: null == participantIds ? _self._participantIds : participantIds // ignore: cast_nullable_to_non_nullable
-as List<String>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime,
+as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,participantIds: null == participantIds ? _self._participantIds : participantIds // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 

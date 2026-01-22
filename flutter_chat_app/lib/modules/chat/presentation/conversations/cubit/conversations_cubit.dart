@@ -23,13 +23,7 @@ class ConversationsCubit extends Cubit<ConversationsState> {
 
   final ChatRoomsRepository _chatRoomsRepository;
   final MessageRepository _messageRepository;
-  String _activeUserId;
-
-  void updateActiveUserId(String activeUserId) {
-    _activeUserId = activeUserId;
-    emit(const ConversationsState.initial());
-    loadConversations();
-  }
+  final String _activeUserId;
 
   Future<void> loadConversations() async {
     emit(const ConversationsState.loading());
