@@ -33,7 +33,7 @@ class _CreateChatRoomCompactLayoutState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Chat Room'),
+        title: Text(context.l10n.createChatRoomTitle),
       ),
       body: BlocListener<CreateChatRoomCubit, CreateChatRoomState>(
         listener: (context, state) {
@@ -57,13 +57,13 @@ class _CreateChatRoomCompactLayoutState
                   autovalidateMode: _autovalidateMode,
                   child: TextFormField(
                     controller: _roomNameController,
-                    decoration: const InputDecoration(
-                      hintText: 'Room Name',
+                    decoration: InputDecoration(
+                      hintText: context.l10n.roomNameLabel,
                       helperText: '',
                     ),
                     validator: (value) => FormValidators.validateRequired(
                       value,
-                      'Room Name',
+                      context.l10n.roomNameLabel,
                       context.l10n,
                     ),
                   ),
@@ -115,7 +115,7 @@ class _CreateChatRoomCompactLayoutState
                       roomName: _roomNameController.text,
                     );
                   },
-                  buttonLabel: 'Create Chat Room',
+                  buttonLabel: context.l10n.createChatRoomButton,
                 ),
               ],
             ),

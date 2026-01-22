@@ -12,7 +12,7 @@ class UserSelectionCompactLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select User'),
+        title: Text(context.l10n.selectUserTitle),
       ),
       body: ScreenHorizontalPadding(
         child: SafeArea(

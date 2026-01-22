@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_app/core/router/app_routes.dart';
+import 'package:flutter_chat_app/l10n/l10n.dart';
 import 'package:flutter_chat_app/modules/user_identity/domain/entities/user.dart';
 import 'package:flutter_chat_app/modules/user_identity/domain/repositories/users_repository.dart';
 import 'package:flutter_chat_app/modules/user_identity/presentation/add_user/add_user_bottom_sheet.dart';
@@ -23,10 +24,10 @@ class UsersList extends StatelessWidget {
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            const Text('No users'),
+            Text(context.l10n.noUsersMessage),
 
             PrimaryButton(
-              buttonLabel: 'Add User',
+              buttonLabel: context.l10n.addUserButton,
               onPressed: () {
                 _showAddUserBottomSheet(context);
               },
@@ -57,7 +58,7 @@ class UsersList extends StatelessWidget {
         ),
         const Vspace(12),
         PrimaryButton(
-          buttonLabel: 'Add User',
+          buttonLabel: context.l10n.addUserButton,
           onPressed: () {
             _showAddUserBottomSheet(context);
           },

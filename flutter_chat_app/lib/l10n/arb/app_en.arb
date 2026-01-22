@@ -73,5 +73,53 @@
   "snackTitleSuccess": "Success",
   "@snackTitleSuccess": {
     "description": "Title for success snack bars"
+  },
+  "appTitle": "Chat App",
+  "@appTitle": {
+    "description": "Title of the application"
+  },
+  "chatsTitle": "Chats",
+  "@chatsTitle": {
+    "description": "Title for the conversations screen"
+  },
+  "createChatRoomTitle": "Create Chat Room",
+  "@createChatRoomTitle": {
+    "description": "Title for the create chat room screen"
+  },
+  "createChatRoomButton": "Create Chat Room",
+  "@createChatRoomButton": {
+    "description": "Label for the create chat room button"
+  },
+  "roomNameLabel": "Room Name",
+  "@roomNameLabel": {
+    "description": "Label for the room name input"
+  },
+  "selectUserTitle": "Select User",
+  "@selectUserTitle": {
+    "description": "Title for the user selection screen"
+  },
+  "noUsersMessage": "No users",
+  "@noUsersMessage": {
+    "description": "Message displayed when the user list is empty"
+  },
+  "addUserButton": "Add User",
+  "@addUserButton": {
+    "description": "Label for the add user button"
+  },
+  "fullNameLabel": "Full Name",
+  "@fullNameLabel": {
+    "description": "Label for the full name input"
+  },
+  "noMessagesMessage": "No messages yet.",
+  "@noMessagesMessage": {
+    "description": "Message displayed when a chat room has no messages"
+  },
+  "errorMessagePrefix": "Error:",
+  "@errorMessagePrefix": {
+    "description": "Prefix for error messages displayed in the UI"
+  },
+  "typeMessageHint": "Type a message...",
+  "@typeMessageHint": {
+    "description": "Hint text for the chat input field"
   }
 }

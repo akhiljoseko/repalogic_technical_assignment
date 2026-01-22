@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/l10n/l10n.dart';
 
 class ChatInputField extends StatefulWidget {
   const ChatInputField({
@@ -39,12 +40,12 @@ class _ChatInputFieldState extends State<ChatInputField> {
           Expanded(
             child: TextField(
               controller: _controller,
-              decoration: const InputDecoration(
-                hintText: 'Type a message...',
-                border: OutlineInputBorder(
+              decoration: InputDecoration(
+                hintText: context.l10n.typeMessageHint,
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(24)),
                 ),
-                contentPadding: EdgeInsets.symmetric(
+                contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 8,
                 ),

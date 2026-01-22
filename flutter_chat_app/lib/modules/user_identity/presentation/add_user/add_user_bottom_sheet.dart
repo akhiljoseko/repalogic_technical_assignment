@@ -51,13 +51,13 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(
-                  hintText: 'Full Name',
+                decoration: InputDecoration(
+                  hintText: context.l10n.fullNameLabel,
                   helperText: '',
                 ),
                 validator: (value) => FormValidators.validateRequired(
                   value,
-                  'Full Name',
+                  context.l10n.fullNameLabel,
                   context.l10n,
                 ),
               ),
@@ -65,7 +65,7 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
               SizedBox(
                 width: double.maxFinite,
                 child: PrimaryButton(
-                  buttonLabel: 'Add User',
+                  buttonLabel: context.l10n.addUserButton,
                   onPressed: () {
                     context.read<AddUserCubit>().addUser(
                       name: _nameController.text.trim(),

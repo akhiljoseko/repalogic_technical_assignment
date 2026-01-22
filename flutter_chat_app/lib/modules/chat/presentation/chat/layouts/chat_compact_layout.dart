@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_app/l10n/l10n.dart';
 import 'package:flutter_chat_app/modules/chat/domain/entities/message.dart';
 import 'package:flutter_chat_app/modules/chat/presentation/chat/cubit/chat_cubit.dart';
 import 'package:flutter_chat_app/modules/chat/presentation/chat/cubit/chat_state.dart';
@@ -35,8 +36,13 @@ class ChatCompactLayout extends StatelessWidget {
                         const Center(child: CircularProgressIndicator()),
                     success: (messages) =>
                         _buildMessageList(messages, activeUserId),
-                    error: (error) =>
-                        Center(child: Text('Error: ${error.errorMessage}')),
+                    error: (error) => Center(
+                      child: Text(
+                        //
+                        // ignore: lines_longer_than_80_chars
+                        '${context.l10n.errorMessagePrefix} ${error.errorMessage}',
+                      ),
+                    ),
                     sending: (messages) =>
                         _buildMessageList(messages, activeUserId),
                   );
@@ -56,7 +62,13 @@ class ChatCompactLayout extends StatelessWidget {
 
   Widget _buildMessageList(List<Message> messages, String activeUserId) {
     if (messages.isEmpty) {
-      return const Center(child: Text('No messages yet.'));
+      return Center(
+        child: Builder(
+          builder: (context) {
+            return Text(context.l10n.noMessagesMessage);
+          },
+        ),
+      );
     }
     return SafeArea(
       child: ListView.builder(
