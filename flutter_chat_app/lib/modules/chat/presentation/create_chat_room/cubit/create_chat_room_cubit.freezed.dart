@@ -131,13 +131,13 @@ return chatRoomCreationFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadingInitialData,TResult Function( List<User> users,  List<User> selectedUsers)?  loadingInitialDataSuccess,TResult Function()?  creatingChatRoom,TResult Function()?  chatRoomCreated,TResult Function( AppException error)?  chatRoomCreationFailed,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadingInitialData,TResult Function( List<User> users,  List<User> selectedUsers)?  loadingInitialDataSuccess,TResult Function()?  creatingChatRoom,TResult Function( ChatRoom chatRoom)?  chatRoomCreated,TResult Function( AppException error)?  chatRoomCreationFailed,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case CreateChatRoomStateLoadingInitialData() when loadingInitialData != null:
 return loadingInitialData();case CreateChatRoomStateLoadingInitialDataSuccess() when loadingInitialDataSuccess != null:
 return loadingInitialDataSuccess(_that.users,_that.selectedUsers);case CreateChatRoomStateCreatingChatRoom() when creatingChatRoom != null:
 return creatingChatRoom();case CreateChatRoomStateChatRoomCreated() when chatRoomCreated != null:
-return chatRoomCreated();case CreateChatRoomStateChatRoomCreationFailed() when chatRoomCreationFailed != null:
+return chatRoomCreated(_that.chatRoom);case CreateChatRoomStateChatRoomCreationFailed() when chatRoomCreationFailed != null:
 return chatRoomCreationFailed(_that.error);case _:
   return orElse();
 
@@ -156,13 +156,13 @@ return chatRoomCreationFailed(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadingInitialData,required TResult Function( List<User> users,  List<User> selectedUsers)  loadingInitialDataSuccess,required TResult Function()  creatingChatRoom,required TResult Function()  chatRoomCreated,required TResult Function( AppException error)  chatRoomCreationFailed,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadingInitialData,required TResult Function( List<User> users,  List<User> selectedUsers)  loadingInitialDataSuccess,required TResult Function()  creatingChatRoom,required TResult Function( ChatRoom chatRoom)  chatRoomCreated,required TResult Function( AppException error)  chatRoomCreationFailed,}) {final _that = this;
 switch (_that) {
 case CreateChatRoomStateLoadingInitialData():
 return loadingInitialData();case CreateChatRoomStateLoadingInitialDataSuccess():
 return loadingInitialDataSuccess(_that.users,_that.selectedUsers);case CreateChatRoomStateCreatingChatRoom():
 return creatingChatRoom();case CreateChatRoomStateChatRoomCreated():
-return chatRoomCreated();case CreateChatRoomStateChatRoomCreationFailed():
+return chatRoomCreated(_that.chatRoom);case CreateChatRoomStateChatRoomCreationFailed():
 return chatRoomCreationFailed(_that.error);case _:
   throw StateError('Unexpected subclass');
 
@@ -180,13 +180,13 @@ return chatRoomCreationFailed(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadingInitialData,TResult? Function( List<User> users,  List<User> selectedUsers)?  loadingInitialDataSuccess,TResult? Function()?  creatingChatRoom,TResult? Function()?  chatRoomCreated,TResult? Function( AppException error)?  chatRoomCreationFailed,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadingInitialData,TResult? Function( List<User> users,  List<User> selectedUsers)?  loadingInitialDataSuccess,TResult? Function()?  creatingChatRoom,TResult? Function( ChatRoom chatRoom)?  chatRoomCreated,TResult? Function( AppException error)?  chatRoomCreationFailed,}) {final _that = this;
 switch (_that) {
 case CreateChatRoomStateLoadingInitialData() when loadingInitialData != null:
 return loadingInitialData();case CreateChatRoomStateLoadingInitialDataSuccess() when loadingInitialDataSuccess != null:
 return loadingInitialDataSuccess(_that.users,_that.selectedUsers);case CreateChatRoomStateCreatingChatRoom() when creatingChatRoom != null:
 return creatingChatRoom();case CreateChatRoomStateChatRoomCreated() when chatRoomCreated != null:
-return chatRoomCreated();case CreateChatRoomStateChatRoomCreationFailed() when chatRoomCreationFailed != null:
+return chatRoomCreated(_that.chatRoom);case CreateChatRoomStateChatRoomCreationFailed() when chatRoomCreationFailed != null:
 return chatRoomCreationFailed(_that.error);case _:
   return null;
 
@@ -343,33 +343,76 @@ String toString() {
 
 
 class CreateChatRoomStateChatRoomCreated implements CreateChatRoomState {
-  const CreateChatRoomStateChatRoomCreated();
+  const CreateChatRoomStateChatRoomCreated({required this.chatRoom});
   
 
+ final  ChatRoom chatRoom;
 
-
+/// Create a copy of CreateChatRoomState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CreateChatRoomStateChatRoomCreatedCopyWith<CreateChatRoomStateChatRoomCreated> get copyWith => _$CreateChatRoomStateChatRoomCreatedCopyWithImpl<CreateChatRoomStateChatRoomCreated>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateChatRoomStateChatRoomCreated);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateChatRoomStateChatRoomCreated&&(identical(other.chatRoom, chatRoom) || other.chatRoom == chatRoom));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,chatRoom);
 
 @override
 String toString() {
-  return 'CreateChatRoomState.chatRoomCreated()';
+  return 'CreateChatRoomState.chatRoomCreated(chatRoom: $chatRoom)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $CreateChatRoomStateChatRoomCreatedCopyWith<$Res> implements $CreateChatRoomStateCopyWith<$Res> {
+  factory $CreateChatRoomStateChatRoomCreatedCopyWith(CreateChatRoomStateChatRoomCreated value, $Res Function(CreateChatRoomStateChatRoomCreated) _then) = _$CreateChatRoomStateChatRoomCreatedCopyWithImpl;
+@useResult
+$Res call({
+ ChatRoom chatRoom
+});
 
 
+$ChatRoomCopyWith<$Res> get chatRoom;
+
+}
+/// @nodoc
+class _$CreateChatRoomStateChatRoomCreatedCopyWithImpl<$Res>
+    implements $CreateChatRoomStateChatRoomCreatedCopyWith<$Res> {
+  _$CreateChatRoomStateChatRoomCreatedCopyWithImpl(this._self, this._then);
+
+  final CreateChatRoomStateChatRoomCreated _self;
+  final $Res Function(CreateChatRoomStateChatRoomCreated) _then;
+
+/// Create a copy of CreateChatRoomState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? chatRoom = null,}) {
+  return _then(CreateChatRoomStateChatRoomCreated(
+chatRoom: null == chatRoom ? _self.chatRoom : chatRoom // ignore: cast_nullable_to_non_nullable
+as ChatRoom,
+  ));
+}
+
+/// Create a copy of CreateChatRoomState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChatRoomCopyWith<$Res> get chatRoom {
+  
+  return $ChatRoomCopyWith<$Res>(_self.chatRoom, (value) {
+    return _then(_self.copyWith(chatRoom: value));
+  });
+}
+}
 
 /// @nodoc
 

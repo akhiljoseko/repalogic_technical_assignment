@@ -58,7 +58,9 @@ class CreateChatRoomCubit extends Cubit<CreateChatRoomState> {
 
     switch (chatRoomResult) {
       case Ok<ChatRoom>():
-        emit(const CreateChatRoomState.chatRoomCreated());
+        emit(
+          CreateChatRoomState.chatRoomCreated(chatRoom: chatRoomResult.value),
+        );
       case Error<ChatRoom>():
         emit(CreateChatRoomState.chatRoomCreationFailed(chatRoomResult.error));
     }

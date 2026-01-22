@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/modules/chat/presentation/chat/chat_screen.dart';
 import 'package:flutter_chat_app/modules/chat/presentation/conversations/conversations_screen.dart';
 import 'package:flutter_chat_app/modules/chat/presentation/create_chat_room/create_chat_room_screen.dart';
 import 'package:flutter_chat_app/modules/user_identity/presentation/user_selection/user_selection_screen.dart';
@@ -26,6 +27,10 @@ class UserSelectionRoute extends GoRouteData with $UserSelectionRoute {
       path: 'create-chat-room',
       name: CreateChatRoomScreen.routeName,
     ),
+    TypedGoRoute<ChatRoute>(
+      path: 'chat/:chatroomId',
+      name: ChatScreen.routeName,
+    ),
   ],
 )
 class ConversationsRoute extends GoRouteData with $ConversationsRoute {
@@ -42,4 +47,20 @@ class CreateChatRoomRoute extends GoRouteData with $CreateChatRoomRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const CreateChatRoomScreen();
+}
+
+class ChatRoute extends GoRouteData with $ChatRoute {
+  const ChatRoute({
+    required this.chatroomId,
+    required this.chatRoomName,
+  });
+
+  final String chatroomId;
+  final String chatRoomName;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => ChatScreen(
+    chatroomId: chatroomId,
+    chatRoomName: chatRoomName,
+  );
 }

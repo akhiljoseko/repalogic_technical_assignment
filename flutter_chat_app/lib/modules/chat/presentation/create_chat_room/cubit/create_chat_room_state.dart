@@ -12,8 +12,9 @@ class CreateChatRoomState with _$CreateChatRoomState {
   const factory CreateChatRoomState.creatingChatRoom() =
       CreateChatRoomStateCreatingChatRoom;
 
-  const factory CreateChatRoomState.chatRoomCreated() =
-      CreateChatRoomStateChatRoomCreated;
+  const factory CreateChatRoomState.chatRoomCreated({
+    required ChatRoom chatRoom,
+  }) = CreateChatRoomStateChatRoomCreated;
 
   const factory CreateChatRoomState.chatRoomCreationFailed(
     AppException error,

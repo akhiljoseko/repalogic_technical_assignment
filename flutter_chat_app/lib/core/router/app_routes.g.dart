@@ -45,6 +45,11 @@ RouteBase get $conversationsRoute => GoRouteData.$route(
       name: '/create-chat-room',
       factory: $CreateChatRoomRoute._fromState,
     ),
+    GoRouteData.$route(
+      path: 'chat/:chatroomId',
+      name: 'chat',
+      factory: $ChatRoute._fromState,
+    ),
   ],
 );
 
@@ -76,6 +81,34 @@ mixin $CreateChatRoomRoute on GoRouteData {
   @override
   String get location =>
       GoRouteData.$location('/conversations/create-chat-room');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin $ChatRoute on GoRouteData {
+  static ChatRoute _fromState(GoRouterState state) => ChatRoute(
+    chatroomId: state.pathParameters['chatroomId']!,
+    chatRoomName: state.uri.queryParameters['chat-room-name']!,
+  );
+
+  ChatRoute get _self => this as ChatRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/conversations/chat/${Uri.encodeComponent(_self.chatroomId)}',
+    queryParams: {'chat-room-name': _self.chatRoomName},
+  );
 
   @override
   void go(BuildContext context) => context.go(location);

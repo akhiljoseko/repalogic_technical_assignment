@@ -16,6 +16,8 @@ class ChatScreen extends StatelessWidget {
   final String chatroomId;
   final String chatRoomName;
 
+  static const routeName = 'chat';
+
   @override
   Widget build(BuildContext context) {
     final activeUser = context.read<ActiveUserCubit>().state!;

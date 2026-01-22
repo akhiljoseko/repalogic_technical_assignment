@@ -41,7 +41,12 @@ class ConversationsCompactLayout extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ConversationListTile(
                   conversation: state.chatRooms[index],
-                  onPressed: () {},
+                  onPressed: () {
+                    ChatRoute(
+                      chatroomId: state.chatRooms[index].roomId,
+                      chatRoomName: state.chatRooms[index].roomName,
+                    ).go(context);
+                  },
                 );
               },
             );
