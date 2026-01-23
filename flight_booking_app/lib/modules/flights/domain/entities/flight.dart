@@ -42,3 +42,14 @@ sealed class Airport with _$Airport {
   factory Airport.fromJson(Map<String, dynamic> json) =>
       _$AirportFromJson(json);
 }
+
+@freezed
+sealed class PassengerInfo with _$PassengerInfo {
+  const factory PassengerInfo({
+    required String name,
+    required String passportNumber,
+  }) = _PassengerInfo;
+
+  factory PassengerInfo.fromJson(Map<String, dynamic> json) =>
+      _$PassengerInfoFromJson(json);
+}

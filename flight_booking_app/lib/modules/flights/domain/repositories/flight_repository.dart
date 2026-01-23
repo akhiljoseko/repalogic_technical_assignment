@@ -7,4 +7,8 @@ abstract class FlightRepository {
     required String destination,
     required DateTime date,
   });
+  Future<Result<bool>> bookFlight({
+    required int flightId,
+    required List<PassengerInfo> passengers,
+  });
 }

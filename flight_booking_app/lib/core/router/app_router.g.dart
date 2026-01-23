@@ -16,6 +16,11 @@ RouteBase get $flightSearchRoute => GoRouteData.$route(
       path: 'results',
       factory: $FlightResultsRoute._fromState,
     ),
+    GoRouteData.$route(path: 'book', factory: $FlightBookingRoute._fromState),
+    GoRouteData.$route(
+      path: 'success',
+      factory: $BookingSuccessRoute._fromState,
+    ),
   ],
 );
 
@@ -63,4 +68,50 @@ mixin $FlightResultsRoute on GoRouteData {
   @override
   void replace(BuildContext context) =>
       context.replace(location, extra: _self.$extra);
+}
+
+mixin $FlightBookingRoute on GoRouteData {
+  static FlightBookingRoute _fromState(GoRouterState state) =>
+      FlightBookingRoute($extra: state.extra as Flight);
+
+  FlightBookingRoute get _self => this as FlightBookingRoute;
+
+  @override
+  String get location => GoRouteData.$location('/book');
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+mixin $BookingSuccessRoute on GoRouteData {
+  static BookingSuccessRoute _fromState(GoRouterState state) =>
+      const BookingSuccessRoute();
+
+  @override
+  String get location => GoRouteData.$location('/success');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
 }

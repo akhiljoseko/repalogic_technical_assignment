@@ -31,12 +31,18 @@ class _FlightSearchContentState extends State<_FlightSearchContent> {
   DateTime? _date;
 
   void _onSearch() {
+    if (_origin.isEmpty || _destination.isEmpty || _date == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select Origin, Destination, and Date'),
+        ),
+      );
+      return;
+    }
     context.read<FlightSearchCubit>().searchFlights(
       origin: _origin,
       destination: _destination,
-      date:
-          _date ??
-          DateTime.now(), // Use current date if null, or just pass null if backend supports it. The repo expects DateTime.
+      date: _date!,
     );
   }
 

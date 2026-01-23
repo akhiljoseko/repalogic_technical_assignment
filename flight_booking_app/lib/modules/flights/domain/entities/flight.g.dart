@@ -49,3 +49,15 @@ Map<String, dynamic> _$AirportToJson(_Airport instance) => <String, dynamic>{
   'country': instance.country,
   'name': instance.name,
 };
+
+_PassengerInfo _$PassengerInfoFromJson(Map<String, dynamic> json) =>
+    _PassengerInfo(
+      name: json['name'] as String,
+      passportNumber: json['passportNumber'] as String,
+    );
+
+Map<String, dynamic> _$PassengerInfoToJson(_PassengerInfo instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'passportNumber': instance.passportNumber,
+    };

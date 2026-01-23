@@ -76,4 +76,15 @@ class FlightRepositoryImpl implements FlightRepository {
 
     return Result.ok(dummyFlights);
   }
+
+  @override
+  Future<Result<bool>> bookFlight({
+    required int flightId,
+    required List<PassengerInfo> passengers,
+  }) async {
+    await Future<void>.delayed(
+      const Duration(seconds: 2),
+    ); // Simulate processing
+    return const Result.ok(true);
+  }
 }
