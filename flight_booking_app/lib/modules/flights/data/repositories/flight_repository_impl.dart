@@ -7,7 +7,12 @@ import 'package:flight_booking_app/modules/flights/domain/entities/passenger_inf
 import 'package:flight_booking_app/modules/flights/domain/exceptions/flight_exceptions.dart';
 import 'package:flight_booking_app/modules/flights/domain/repositories/flight_repository.dart';
 
+/// Implementation of [FlightRepository] that interacts with [FlightApi].
+///
+/// Handles data transformation from DTOs (Data Transfer Objects) to Domain Entities
+/// and error handling by mapping exceptions to domain-specific failures.
 class FlightRepositoryImpl implements FlightRepository {
+  /// Creates a [FlightRepositoryImpl] with the given [FlightApi].
   FlightRepositoryImpl(this._api);
 
   final FlightApi _api;
@@ -19,10 +24,15 @@ class FlightRepositoryImpl implements FlightRepository {
     required DateTime date,
   }) async {
     try {
+      // Fetch flight models from API
       final flightModels = await _api.searchFlights(origin, destination, date);
+
+      // Map API models to Domain entities
       final flights = flightModels.map((model) => model.toEntity()).toList();
+
       return Result.ok(flights);
     } catch (e) {
+      // Wrap generic errors in specific domain exception
       return Result.error(
         FlightSearchException() as Never,
       );
@@ -35,9 +45,12 @@ class FlightRepositoryImpl implements FlightRepository {
     required List<PassengerInfo> passengers,
   }) async {
     try {
+      // Map domain entities to API models
       final passengerModels = passengers
           .map(PassengerModel.fromEntity)
           .toList();
+
+      // Perform booking request
       final success = await _api.bookFlight(flightId, passengerModels);
       return Result.ok(success);
     } catch (e) {

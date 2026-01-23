@@ -9,7 +9,7 @@ class FlightSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return Card(
       color: Colors.blue[50],
       child: Padding(

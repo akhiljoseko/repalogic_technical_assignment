@@ -7,14 +7,22 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'airport_search_state.dart';
 part 'airport_search_cubit.freezed.dart';
 
-/// Cubit for managing airport search state
+/// Cubit for managing airport search state.
+///
+/// Handles fetching airport suggestions based on user input query.
+/// Used by [LocationInputCard] for autocomplete functionality.
 class AirportSearchCubit extends Cubit<AirportSearchState> {
+  /// Creates an [AirportSearchCubit] with the given [FlightRepository].
   AirportSearchCubit(this._repository)
     : super(const AirportSearchState.initial());
 
   final FlightRepository _repository;
 
-  /// Search for airports by query
+  /// Searches for airports matching the [query].
+  ///
+  /// If [query] is empty, emits [AirportSearchState.initial].
+  /// Otherwise, emits [AirportSearchState.loading] followed by
+  /// [AirportSearchState.loaded] with results or [AirportSearchState.error].
   Future<void> searchAirports(String query) async {
     if (query.isEmpty) {
       emit(const AirportSearchState.initial());
@@ -33,7 +41,7 @@ class AirportSearchCubit extends Cubit<AirportSearchState> {
     }
   }
 
-  /// Clear search results
+  /// Clears the current search results and resets state to initial.
   void clear() {
     emit(const AirportSearchState.initial());
   }

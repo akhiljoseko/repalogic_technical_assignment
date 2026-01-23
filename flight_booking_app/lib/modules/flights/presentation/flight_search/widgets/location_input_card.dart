@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flight_booking_app/l10n/gen/app_localizations.dart';
 
+/// A card widget containing input fields for origin and destination.
+///
+/// Provides autocomplete functionality for airport search using [AirportSearchCubit].
+/// Allows swapping origin and destination values.
 class LocationInputCard extends StatefulWidget {
   const LocationInputCard({
     required this.onOriginChanged,
@@ -12,7 +16,10 @@ class LocationInputCard extends StatefulWidget {
     super.key,
   });
 
+  /// Callback triggered when origin location changes.
   final ValueChanged<String> onOriginChanged;
+
+  /// Callback triggered when destination location changes.
   final ValueChanged<String> onDestinationChanged;
 
   @override
@@ -49,7 +56,7 @@ class _LocationInputCardState extends State<LocationInputCard> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

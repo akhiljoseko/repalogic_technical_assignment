@@ -7,8 +7,12 @@ import 'package:flight_booking_app/modules/flights/data/models/airport_model.dar
 import 'package:flight_booking_app/modules/flights/data/models/flight_model.dart';
 import 'package:flight_booking_app/modules/flights/data/models/passenger_model.dart';
 
-/// Local implementation of FlightApi that generates flights at runtime
+/// Local implementation of [FlightApi] that generates flights at runtime.
+///
+/// Simulates a backend by generating random flight data, including airlines,
+/// times, and prices. Also simulates network latency.
 class FlightLocalApi implements FlightApi {
+  /// Creates a [FlightLocalApi] instance.
   FlightLocalApi() : _random = Random();
 
   final Random _random;
@@ -125,7 +129,9 @@ class FlightLocalApi implements FlightApi {
     }).toList();
   }
 
-  /// Find airport by city name (case-insensitive contains match)
+  /// Finds an airport by its exact code (case-insensitive).
+  ///
+  /// Returns `null` if no airport is found with the given code.
   AirportModel? _findAirport(String cityQuery) {
     final query = cityQuery.toLowerCase();
     try {

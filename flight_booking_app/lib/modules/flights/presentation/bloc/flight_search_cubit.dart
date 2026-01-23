@@ -7,12 +7,25 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'flight_search_state.dart';
 part 'flight_search_cubit.freezed.dart';
 
+/// Cubit for managing flight search state.
+///
+/// Fetches flight results using [FlightRepository] based on search criteria.
+/// Emits list of flights on success or error message on failure.
 class FlightSearchCubit extends Cubit<FlightSearchState> {
+  /// Creates a [FlightSearchCubit] with the given [FlightRepository].
   FlightSearchCubit(this._repository)
     : super(const FlightSearchState.initial());
 
   final FlightRepository _repository;
 
+  /// Searches for flights matching the specified criteria.
+  ///
+  /// [origin] - Origin airport code or city.
+  /// [destination] - Destination airport code or city.
+  /// [date] - Travel date.
+  ///
+  /// Emits [FlightSearchState.loading], then [FlightSearchState.success] with results
+  /// or [FlightSearchState.failure].
   Future<void> searchFlights({
     required String origin,
     required String destination,

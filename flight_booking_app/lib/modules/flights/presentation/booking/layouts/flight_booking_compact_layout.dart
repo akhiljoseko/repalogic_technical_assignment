@@ -66,7 +66,7 @@ class _FlightBookingContentState extends State<_FlightBookingContent> {
   }
 
   void _bookFlight(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     for (int i = 0; i < _passengerCount; i++) {
       if (_nameControllers[i].text.isEmpty ||
           _passportControllers[i].text.isEmpty) {
@@ -94,7 +94,7 @@ class _FlightBookingContentState extends State<_FlightBookingContent> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.ttlBookFlight)),
       body: BlocConsumer<FlightBookingCubit, FlightBookingState>(
