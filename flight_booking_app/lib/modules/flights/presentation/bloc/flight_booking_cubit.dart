@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flight_booking_app/core/utils/result.dart';
-import 'package:flight_booking_app/modules/flights/domain/entities/flight.dart';
+import 'package:flight_booking_app/modules/flights/domain/entities/passenger_info.dart';
 import 'package:flight_booking_app/modules/flights/domain/repositories/flight_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

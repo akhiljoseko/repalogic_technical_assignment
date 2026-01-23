@@ -1,5 +1,6 @@
 import 'package:flight_booking_app/core/router/app_router.dart';
 import 'package:flight_booking_app/modules/flights/domain/entities/flight.dart';
+import 'package:flight_booking_app/modules/flights/domain/entities/passenger_info.dart';
 import 'package:flight_booking_app/modules/flights/domain/repositories/flight_repository.dart';
 import 'package:flight_booking_app/modules/flights/presentation/bloc/flight_booking_cubit.dart';
 import 'package:flight_booking_app/modules/flights/presentation/booking/widgets/flight_summary_card.dart';

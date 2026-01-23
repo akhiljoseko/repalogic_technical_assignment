@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:flight_booking_app/modules/flights/data/api/flight_api.dart';
 import 'package:flight_booking_app/modules/flights/data/datasources/hardcoded_airports.dart';
-import 'package:flight_booking_app/modules/flights/data/models/flight_dto.dart';
+import 'package:flight_booking_app/modules/flights/data/models/airline_model.dart';
+import 'package:flight_booking_app/modules/flights/data/models/airport_model.dart';
+import 'package:flight_booking_app/modules/flights/data/models/flight_model.dart';
+import 'package:flight_booking_app/modules/flights/data/models/passenger_model.dart';
 
 /// Local implementation of FlightApi that generates flights at runtime
 class FlightLocalApi implements FlightApi {
@@ -10,10 +13,10 @@ class FlightLocalApi implements FlightApi {
 
   final Random _random;
 
-  // Convert domain Airport entities to DTOs for internal use
-  static final List<AirportDto> _airports = kHardcodedAirports
+  // Convert domain Airport entities to Models for internal use
+  static final List<AirportModel> _airports = kHardcodedAirports
       .map(
-        (airport) => AirportDto(
+        (airport) => AirportModel(
           code: airport.code,
           city: airport.city,
           country: airport.country,
@@ -22,21 +25,21 @@ class FlightLocalApi implements FlightApi {
       )
       .toList();
 
-  static const List<AirlineDto> _airlines = [
-    AirlineDto(name: 'Emirates', code: 'EK'),
-    AirlineDto(name: 'Qatar Airways', code: 'QR'),
-    AirlineDto(name: 'Singapore Airlines', code: 'SQ'),
-    AirlineDto(name: 'Lufthansa', code: 'LH'),
-    AirlineDto(name: 'British Airways', code: 'BA'),
-    AirlineDto(name: 'Air France', code: 'AF'),
-    AirlineDto(name: 'Delta', code: 'DL'),
-    AirlineDto(name: 'United', code: 'UA'),
-    AirlineDto(name: 'American Airlines', code: 'AA'),
-    AirlineDto(name: 'KLM', code: 'KL'),
+  static const List<AirlineModel> _airlines = [
+    AirlineModel(name: 'Emirates', code: 'EK'),
+    AirlineModel(name: 'Qatar Airways', code: 'QR'),
+    AirlineModel(name: 'Singapore Airlines', code: 'SQ'),
+    AirlineModel(name: 'Lufthansa', code: 'LH'),
+    AirlineModel(name: 'British Airways', code: 'BA'),
+    AirlineModel(name: 'Air France', code: 'AF'),
+    AirlineModel(name: 'Delta', code: 'DL'),
+    AirlineModel(name: 'United', code: 'UA'),
+    AirlineModel(name: 'American Airlines', code: 'AA'),
+    AirlineModel(name: 'KLM', code: 'KL'),
   ];
 
   @override
-  Future<List<FlightDto>> searchFlights(
+  Future<List<FlightModel>> searchFlights(
     String origin,
     String destination,
     DateTime date,
@@ -54,7 +57,7 @@ class FlightLocalApi implements FlightApi {
 
     // Generate 10-15 flights
     final numFlights = 10 + _random.nextInt(6); // 10-15 flights
-    final flights = <FlightDto>[];
+    final flights = <FlightModel>[];
 
     for (var i = 0; i < numFlights; i++) {
       final airline = _airlines[_random.nextInt(_airlines.length)];
@@ -79,7 +82,7 @@ class FlightLocalApi implements FlightApi {
       final price = 200.0 + _random.nextInt(1301);
 
       flights.add(
-        FlightDto(
+        FlightModel(
           id: i + 1,
           airline: airline,
           flightNumber: flightNumber,
@@ -101,15 +104,29 @@ class FlightLocalApi implements FlightApi {
   @override
   Future<bool> bookFlight(
     int flightId,
-    List<PassengerDto> passengers,
+    List<PassengerModel> passengers,
   ) async {
     // Simulate booking processing
     await Future<void>.delayed(const Duration(seconds: 2));
     return true;
   }
 
+  @override
+  Future<List<AirportModel>> searchAirports(String query) async {
+    if (query.isEmpty) {
+      return [];
+    }
+
+    final lowerQuery = query.toLowerCase();
+    return _airports.where((airport) {
+      return airport.city.toLowerCase().contains(lowerQuery) ||
+          airport.code.toLowerCase().contains(lowerQuery) ||
+          airport.name.toLowerCase().contains(lowerQuery);
+    }).toList();
+  }
+
   /// Find airport by city name (case-insensitive contains match)
-  AirportDto? _findAirport(String cityQuery) {
+  AirportModel? _findAirport(String cityQuery) {
     final query = cityQuery.toLowerCase();
     try {
       return _airports.firstWhere(

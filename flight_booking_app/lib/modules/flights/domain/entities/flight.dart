@@ -1,3 +1,5 @@
+import 'package:flight_booking_app/modules/flights/domain/entities/airline.dart';
+import 'package:flight_booking_app/modules/flights/domain/entities/airport.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'flight.freezed.dart';
@@ -17,39 +19,4 @@ sealed class Flight with _$Flight {
   }) = _Flight;
 
   factory Flight.fromJson(Map<String, dynamic> json) => _$FlightFromJson(json);
-}
-
-@freezed
-sealed class Airline with _$Airline {
-  const factory Airline({
-    required String name,
-    required String code,
-  }) = _Airline;
-
-  factory Airline.fromJson(Map<String, dynamic> json) =>
-      _$AirlineFromJson(json);
-}
-
-@freezed
-sealed class Airport with _$Airport {
-  const factory Airport({
-    required String code,
-    required String city,
-    required String country,
-    required String name,
-  }) = _Airport;
-
-  factory Airport.fromJson(Map<String, dynamic> json) =>
-      _$AirportFromJson(json);
-}
-
-@freezed
-sealed class PassengerInfo with _$PassengerInfo {
-  const factory PassengerInfo({
-    required String name,
-    required String passportNumber,
-  }) = _PassengerInfo;
-
-  factory PassengerInfo.fromJson(Map<String, dynamic> json) =>
-      _$PassengerInfoFromJson(json);
 }

@@ -1,7 +1,10 @@
 import 'package:flight_booking_app/core/utils/result.dart';
 import 'package:flight_booking_app/modules/flights/data/api/flight_api.dart';
-import 'package:flight_booking_app/modules/flights/data/models/flight_dto.dart';
+import 'package:flight_booking_app/modules/flights/data/models/passenger_model.dart';
+import 'package:flight_booking_app/modules/flights/domain/entities/airport.dart';
 import 'package:flight_booking_app/modules/flights/domain/entities/flight.dart';
+import 'package:flight_booking_app/modules/flights/domain/entities/passenger_info.dart';
+import 'package:flight_booking_app/modules/flights/domain/exceptions/flight_exceptions.dart';
 import 'package:flight_booking_app/modules/flights/domain/repositories/flight_repository.dart';
 
 class FlightRepositoryImpl implements FlightRepository {
@@ -16,12 +19,12 @@ class FlightRepositoryImpl implements FlightRepository {
     required DateTime date,
   }) async {
     try {
-      final flightDtos = await _api.searchFlights(origin, destination, date);
-      final flights = flightDtos.map(_mapDtoToEntity).toList();
+      final flightModels = await _api.searchFlights(origin, destination, date);
+      final flights = flightModels.map((model) => model.toEntity()).toList();
       return Result.ok(flights);
     } catch (e) {
       return Result.error(
-        Exception('Failed to search flights: $e') as Never,
+        FlightSearchException() as Never,
       );
     }
   }
@@ -32,48 +35,28 @@ class FlightRepositoryImpl implements FlightRepository {
     required List<PassengerInfo> passengers,
   }) async {
     try {
-      final passengerDtos = passengers.map(_mapPassengerToDto).toList();
-      final success = await _api.bookFlight(flightId, passengerDtos);
+      final passengerModels = passengers
+          .map(PassengerModel.fromEntity)
+          .toList();
+      final success = await _api.bookFlight(flightId, passengerModels);
       return Result.ok(success);
     } catch (e) {
       return Result.error(
-        Exception('Failed to book flight: $e') as Never,
+        FlightBookingException() as Never,
       );
     }
   }
 
-  /// Map FlightDto to Flight entity
-  Flight _mapDtoToEntity(FlightDto dto) {
-    return Flight(
-      id: dto.id,
-      airline: Airline(
-        name: dto.airline.name,
-        code: dto.airline.code,
-      ),
-      flightNumber: dto.flightNumber,
-      departureTime: dto.departureTime,
-      arrivalTime: dto.arrivalTime,
-      origin: Airport(
-        code: dto.origin.code,
-        city: dto.origin.city,
-        country: dto.origin.country,
-        name: dto.origin.name,
-      ),
-      destination: Airport(
-        code: dto.destination.code,
-        city: dto.destination.city,
-        country: dto.destination.country,
-        name: dto.destination.name,
-      ),
-      price: dto.price,
-    );
-  }
-
-  /// Map PassengerInfo entity to PassengerDto
-  PassengerDto _mapPassengerToDto(PassengerInfo passenger) {
-    return PassengerDto(
-      name: passenger.name,
-      passportNumber: passenger.passportNumber,
-    );
+  @override
+  Future<Result<List<Airport>>> searchAirports(String query) async {
+    try {
+      final airportModels = await _api.searchAirports(query);
+      final airports = airportModels.map((model) => model.toEntity()).toList();
+      return Result.ok(airports);
+    } catch (e) {
+      return Result.error(
+        AirportSearchException() as Never,
+      );
+    }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flight_booking_app/modules/flights/domain/entities/flight.dart';
+import 'package:flight_booking_app/modules/flights/domain/entities/airport.dart';
 
 /// Single source of truth for all airports in the application
 const List<Airport> kHardcodedAirports = [
