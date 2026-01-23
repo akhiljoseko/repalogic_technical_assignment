@@ -2,7 +2,12 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flight_booking_app/modules/flights/data/api/flight_api.dart';
+import 'package:flight_booking_app/modules/flights/data/api/flight_local_api.dart';
+import 'package:flight_booking_app/modules/flights/data/repositories/flight_repository_impl.dart';
+import 'package:flight_booking_app/modules/flights/domain/repositories/flight_repository.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -29,5 +34,19 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   // Add cross-flavor configuration here
 
-  runApp(await builder());
+  runApp(
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<FlightApi>(
+          create: (_) => FlightLocalApi(),
+        ),
+        RepositoryProvider<FlightRepository>(
+          create: (context) => FlightRepositoryImpl(
+            context.read<FlightApi>(),
+          ),
+        ),
+      ],
+      child: await builder(),
+    ),
+  );
 }

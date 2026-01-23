@@ -1,6 +1,6 @@
 import 'package:flight_booking_app/core/router/app_router.dart';
-import 'package:flight_booking_app/modules/flights/data/repositories/flight_repository_impl.dart';
 import 'package:flight_booking_app/modules/flights/domain/entities/flight.dart';
+import 'package:flight_booking_app/modules/flights/domain/repositories/flight_repository.dart';
 import 'package:flight_booking_app/modules/flights/presentation/bloc/flight_booking_cubit.dart';
 import 'package:flight_booking_app/modules/flights/presentation/booking/widgets/flight_summary_card.dart';
 import 'package:flight_booking_app/modules/flights/presentation/booking/widgets/passenger_form.dart';
@@ -15,7 +15,9 @@ class FlightBookingCompactLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FlightBookingCubit(FlightRepositoryImpl()),
+      create: (context) => FlightBookingCubit(
+        context.read<FlightRepository>(),
+      ),
       child: _FlightBookingContent(flight: flight),
     );
   }

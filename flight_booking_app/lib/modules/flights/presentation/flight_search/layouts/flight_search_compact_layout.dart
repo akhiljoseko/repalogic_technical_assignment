@@ -1,5 +1,5 @@
 import 'package:flight_booking_app/core/router/app_router.dart';
-import 'package:flight_booking_app/modules/flights/data/repositories/flight_repository_impl.dart';
+import 'package:flight_booking_app/modules/flights/domain/repositories/flight_repository.dart';
 import 'package:flight_booking_app/modules/flights/presentation/bloc/flight_search_cubit.dart';
 import 'package:flight_booking_app/modules/flights/presentation/flight_search/widgets/date_selector_card.dart';
 import 'package:flight_booking_app/modules/flights/presentation/flight_search/widgets/location_input_card.dart';
@@ -12,7 +12,9 @@ class FlightSearchCompactLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FlightSearchCubit(FlightRepositoryImpl()),
+      create: (context) => FlightSearchCubit(
+        context.read<FlightRepository>(),
+      ),
       child: const _FlightSearchContent(),
     );
   }
