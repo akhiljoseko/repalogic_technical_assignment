@@ -1,4 +1,5 @@
 import 'package:flight_booking_app/core/router/app_router.dart';
+import 'package:flight_booking_app/l10n/gen/app_localizations.dart';
 import 'package:flight_booking_app/modules/flights/domain/entities/flight.dart';
 import 'package:flight_booking_app/modules/flights/domain/entities/passenger_info.dart';
 import 'package:flight_booking_app/modules/flights/domain/repositories/flight_repository.dart';
@@ -65,12 +66,13 @@ class _FlightBookingContentState extends State<_FlightBookingContent> {
   }
 
   void _bookFlight(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     for (int i = 0; i < _passengerCount; i++) {
       if (_nameControllers[i].text.isEmpty ||
           _passportControllers[i].text.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Please fill all details for Passenger ${i + 1}'),
+            content: Text(l10n.msgFillDetails(i + 1)),
           ),
         );
         return;
@@ -92,14 +94,15 @@ class _FlightBookingContentState extends State<_FlightBookingContent> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('Book Flight')),
+      appBar: AppBar(title: Text(l10n.ttlBookFlight)),
       body: BlocConsumer<FlightBookingCubit, FlightBookingState>(
         listener: (context, state) {
           state.whenOrNull(
             success: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Flight Booked Successfully!')),
+                SnackBar(content: Text(l10n.msgFlightBooked)),
               );
               const BookingSuccessRoute().go(context);
             },
@@ -146,7 +149,7 @@ class _FlightBookingContentState extends State<_FlightBookingContent> {
                   ),
                   child: isLoading
                       ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text('Book Ticket'),
+                      : Text(l10n.btnBookTicket),
                 ),
               ],
             ),

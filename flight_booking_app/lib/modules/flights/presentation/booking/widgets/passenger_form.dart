@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flight_booking_app/l10n/gen/app_localizations.dart';
 
 class PassengerForm extends StatelessWidget {
   const PassengerForm({
@@ -16,6 +17,7 @@ class PassengerForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -23,7 +25,7 @@ class PassengerForm extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Passengers',
+              l10n.lblPassengers,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             DropdownButton<int>(
@@ -32,7 +34,7 @@ class PassengerForm extends StatelessWidget {
                   .map(
                     (e) => DropdownMenuItem(
                       value: e,
-                      child: Text('$e Adult(s)'),
+                      child: Text(l10n.lblAdults(e)),
                     ),
                   )
                   .toList(),
@@ -54,7 +56,7 @@ class PassengerForm extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Passenger ${index + 1}',
+                      l10n.lblPassengerN(index + 1),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -62,17 +64,17 @@ class PassengerForm extends StatelessWidget {
                     const SizedBox(height: 8),
                     TextField(
                       controller: nameControllers[index],
-                      decoration: const InputDecoration(
-                        labelText: 'Name',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.lblName,
+                        border: const OutlineInputBorder(),
                       ),
                     ),
                     const SizedBox(height: 8),
                     TextField(
                       controller: passportControllers[index],
-                      decoration: const InputDecoration(
-                        labelText: 'Passport Number',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.lblPassportNumber,
+                        border: const OutlineInputBorder(),
                       ),
                     ),
                   ],

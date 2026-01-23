@@ -11,8 +11,7 @@ class FlightSearchException extends AppException {
 
   @override
   String localize(AppLocalizations l10n) {
-    // Should be l10n.errFlightSearch
-    return errorMessage;
+    return l10n.errFlightSearch;
   }
 }
 
@@ -26,8 +25,7 @@ class FlightBookingException extends AppException {
 
   @override
   String localize(AppLocalizations l10n) {
-    // Should be l10n.errFlightBooking
-    return errorMessage;
+    return l10n.errFlightBooking;
   }
 }
 
@@ -41,7 +39,6 @@ class AirportSearchException extends AppException {
 
   @override
   String localize(AppLocalizations l10n) {
-    // Should be l10n.errAirportSearch
-    return errorMessage;
+    return l10n.errAirportSearch;
   }
 }

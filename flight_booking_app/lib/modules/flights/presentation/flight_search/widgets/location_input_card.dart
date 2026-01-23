@@ -3,6 +3,7 @@ import 'package:flight_booking_app/modules/flights/domain/repositories/flight_re
 import 'package:flight_booking_app/modules/flights/presentation/bloc/airport_search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flight_booking_app/l10n/gen/app_localizations.dart';
 
 class LocationInputCard extends StatefulWidget {
   const LocationInputCard({
@@ -48,6 +49,7 @@ class _LocationInputCardState extends State<LocationInputCard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -64,7 +66,7 @@ class _LocationInputCardState extends State<LocationInputCard> {
                   ),
                   child: _buildAutocompleteField(
                     controller: _originController,
-                    label: 'From',
+                    label: l10n.lblFrom,
                     icon: Icons.flight_takeoff,
                     onChanged: _updateOrigin,
                   ),
@@ -76,7 +78,7 @@ class _LocationInputCardState extends State<LocationInputCard> {
                   ),
                   child: _buildAutocompleteField(
                     controller: _destController,
-                    label: 'To',
+                    label: l10n.lblTo,
                     icon: Icons.flight_land,
                     onChanged: _updateDest,
                   ),

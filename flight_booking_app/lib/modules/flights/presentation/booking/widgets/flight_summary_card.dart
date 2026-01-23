@@ -1,5 +1,6 @@
 import 'package:flight_booking_app/modules/flights/domain/entities/flight.dart';
 import 'package:flutter/material.dart';
+import 'package:flight_booking_app/l10n/gen/app_localizations.dart';
 
 class FlightSummaryCard extends StatelessWidget {
   const FlightSummaryCard({required this.flight, super.key});
@@ -8,6 +9,7 @@ class FlightSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       color: Colors.blue[50],
       child: Padding(
@@ -33,7 +35,7 @@ class FlightSummaryCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Price: \$${flight.price}',
+              l10n.lblPrice(flight.price),
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.green,

@@ -1,8 +1,90 @@
 {
   "@@locale": "en",
+  "btnBookTicket": "Book Ticket",
+  "@btnBookTicket": {
+    "description": "Label for book ticket button"
+  },
+  "errAirportSearch": "Failed to search airports",
+  "@errAirportSearch": {
+    "description": "Error message for airport search failure"
+  },
+  "errFlightBooking": "Failed to book flight",
+  "@errFlightBooking": {
+    "description": "Error message for flight booking failure"
+  },
+  "errFlightSearch": "Failed to search flights",
+  "@errFlightSearch": {
+    "description": "Error message for flight search failure"
+  },
   "errUnknown": "An unknown error occurred. Please try again later.",
   "@errUnknown": {
     "description": "Generic unknown error message"
+  },
+  "lblAdults": "{count} Adult(s)",
+  "@lblAdults": {
+    "description": "Label for adult count dropdown",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "lblFrom": "From",
+  "@lblFrom": {
+    "description": "Label for origin field"
+  },
+  "lblName": "Name",
+  "@lblName": {
+    "description": "Label for name input"
+  },
+  "lblPassengerN": "Passenger {index}",
+  "@lblPassengerN": {
+    "description": "Label for individual passenger",
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "lblPassengers": "Passengers",
+  "@lblPassengers": {
+    "description": "Label for passengers section"
+  },
+  "lblPassportNumber": "Passport Number",
+  "@lblPassportNumber": {
+    "description": "Label for passport number input"
+  },
+  "lblPrice": "Price: ${price}",
+  "@lblPrice": {
+    "description": "Label for price display",
+    "placeholders": {
+      "price": {
+        "type": "double",
+        "format": "currency",
+        "optionalParameters": {
+          "decimalDigits": 2,
+          "name": "USD",
+          "symbol": "$"
+        }
+      }
+    }
+  },
+  "lblTo": "To",
+  "@lblTo": {
+    "description": "Label for destination field"
+  },
+  "msgFillDetails": "Please fill all details for Passenger {index}",
+  "@msgFillDetails": {
+    "description": "Validation error message for passenger details",
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "msgFlightBooked": "Flight Booked Successfully!",
+  "@msgFlightBooked": {
+    "description": "Success message after booking"
   },
   "snackTitleError": "Error",
   "@snackTitleError": {
@@ -11,5 +93,9 @@
   "snackTitleSuccess": "Success",
   "@snackTitleSuccess": {
     "description": "Title for success snack bars"
+  },
+  "ttlBookFlight": "Book Flight",
+  "@ttlBookFlight": {
+    "description": "Title for the book flight screen"
   }
 }
