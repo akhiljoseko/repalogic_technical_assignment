@@ -1,5 +1,5 @@
-import 'package:flight_booking_app/counter/counter.dart';
 import 'package:flight_booking_app/l10n/l10n.dart';
+import 'package:flight_booking_app/modules/flights/presentation/flight_search/flight_search_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const FlightSearchScreen(),
     );
   }
 }
