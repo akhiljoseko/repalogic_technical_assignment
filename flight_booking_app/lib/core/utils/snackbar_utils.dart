@@ -1,0 +1,108 @@
+import 'package:flight_booking_app/core/utils/context_extensions.dart';
+import 'package:flight_booking_app/l10n/l10n.dart';
+import 'package:flutter/material.dart';
+
+abstract class SnackbarUtils {
+  static void showSuccessSnackBar(
+    BuildContext context, {
+    String? title,
+    String? content,
+  }) {
+    final effectiveTitle = title ?? context.l10n.snackTitleSuccess;
+    const bgColor = Colors.green;
+    const textColor = Colors.white;
+    final snackBar = SnackBar(
+      backgroundColor: bgColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(8),
+      ),
+      behavior: SnackBarBehavior.floating,
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            effectiveTitle,
+            style: context.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: textColor,
+            ),
+          ),
+          if (content?.isNotEmpty ?? false)
+            Text(
+              content!,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: textColor,
+              ),
+            ),
+        ],
+      ),
+    );
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
+  static void showErrorSnackBar(
+    BuildContext context, {
+    String? title,
+    String? content,
+  }) {
+    final effectiveTitle = title ?? context.l10n.snackTitleError;
+    final snackBar = SnackBar(
+      backgroundColor: context.colorScheme.errorContainer,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(8),
+      ),
+      behavior: SnackBarBehavior.floating,
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            effectiveTitle,
+            style: context.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: context.colorScheme.onErrorContainer,
+            ),
+          ),
+          if (content?.isNotEmpty ?? false)
+            Text(
+              content!,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: context.colorScheme.onErrorContainer,
+              ),
+            ),
+        ],
+      ),
+    );
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
+  static void showInfoSnackBar(
+    BuildContext context, {
+    required String content,
+  }) {
+    final snackBar = SnackBar(
+      backgroundColor: context.colorScheme.primaryContainer,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(8),
+      ),
+      behavior: SnackBarBehavior.floating,
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            content,
+            style: context.textTheme.bodyMedium?.copyWith(
+              color: context.colorScheme.onPrimaryContainer,
+            ),
+          ),
+        ],
+      ),
+    );
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+}
