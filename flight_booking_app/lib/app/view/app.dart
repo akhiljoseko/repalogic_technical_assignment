@@ -1,5 +1,5 @@
+import 'package:flight_booking_app/core/router/app_router.dart';
 import 'package:flight_booking_app/l10n/l10n.dart';
-import 'package:flight_booking_app/modules/flights/presentation/flight_search/flight_search_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -7,7 +7,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: appRouter,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -16,7 +17,6 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const FlightSearchScreen(),
     );
   }
 }

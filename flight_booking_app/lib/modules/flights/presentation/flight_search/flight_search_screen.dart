@@ -1,3 +1,5 @@
+import 'package:flight_booking_app/modules/flights/presentation/flight_search/layouts/flight_search_compact_layout.dart';
+import 'package:flight_booking_app/shared/widgets/responsive_builder.dart';
 import 'package:flutter/material.dart';
 
 class FlightSearchScreen extends StatelessWidget {
@@ -5,10 +7,8 @@ class FlightSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Flight Search'),
-      ),
+    return ResponsiveBuilder(
+      compactLayout: (_, _, _) => const FlightSearchCompactLayout(),
     );
   }
 }
