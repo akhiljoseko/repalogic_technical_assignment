@@ -30,6 +30,9 @@ class _LocationInputCardState extends State<LocationInputCard> {
   final TextEditingController _originController = TextEditingController();
   final TextEditingController _destController = TextEditingController();
 
+  String? _originCode;
+  String? _destCode;
+
   void _updateOrigin(String value) {
     widget.onOriginChanged(value);
   }
@@ -46,12 +49,18 @@ class _LocationInputCardState extends State<LocationInputCard> {
   }
 
   void _swapLocations() {
-    final temp = _originController.text;
-    _originController.text = _destController.text;
-    _destController.text = temp;
+    final tempText = _originController.text;
+    final tempCode = _originCode;
 
-    _updateOrigin(_originController.text);
-    _updateDest(_destController.text);
+    _originController.text = _destController.text;
+    _originCode = _destCode;
+
+    _destController.text = tempText;
+    _destCode = tempCode;
+
+    // Trigger updates with code if available (ideal), else text
+    _updateOrigin(_originCode ?? _originController.text);
+    _updateDest(_destCode ?? _destController.text);
   }
 
   @override
@@ -76,6 +85,7 @@ class _LocationInputCardState extends State<LocationInputCard> {
                     label: l10n.lblFrom,
                     icon: Icons.flight_takeoff,
                     onChanged: _updateOrigin,
+                    onCodeChanged: (code) => _originCode = code,
                   ),
                 ),
                 const Divider(),
@@ -88,6 +98,7 @@ class _LocationInputCardState extends State<LocationInputCard> {
                     label: l10n.lblTo,
                     icon: Icons.flight_land,
                     onChanged: _updateDest,
+                    onCodeChanged: (code) => _destCode = code,
                   ),
                 ),
               ],
@@ -112,33 +123,33 @@ class _LocationInputCardState extends State<LocationInputCard> {
     required String label,
     required IconData icon,
     required ValueChanged<String> onChanged,
+    required ValueChanged<String?> onCodeChanged,
   }) {
     return BlocBuilder<AirportSearchCubit, AirportSearchState>(
       builder: (context, state) {
-        final airports = state.maybeWhen(
-          loaded: (airports) => airports,
-          orElse: () => <Airport>[],
+        final isLoading = state.maybeWhen(
+          loading: () => true,
+          orElse: () => false,
         );
 
         return RawAutocomplete<Airport>(
           textEditingController: controller,
           focusNode: FocusNode(),
-          optionsBuilder: (TextEditingValue textEditingValue) {
+          optionsBuilder: (TextEditingValue textEditingValue) async {
             if (textEditingValue.text.isEmpty) {
               context.read<AirportSearchCubit>().clear();
               return const Iterable<Airport>.empty();
             }
 
-            // Trigger search through cubit
-            context.read<AirportSearchCubit>().searchAirports(
+            // Await the result directly for Autocomplete to handle delay
+            return context.read<AirportSearchCubit>().searchAirports(
               textEditingValue.text,
             );
-
-            return airports;
           },
           displayStringForOption: (Airport option) =>
               '${option.city} (${option.code})',
           onSelected: (Airport selection) {
+            onCodeChanged(selection.code);
             onChanged(selection.code);
           },
           fieldViewBuilder:
@@ -151,12 +162,23 @@ class _LocationInputCardState extends State<LocationInputCard> {
                 return TextField(
                   controller: fieldTextEditingController,
                   focusNode: fieldFocusNode,
-                  onChanged: (val) => onChanged(val),
+                  onChanged: (val) {
+                    onCodeChanged(null); // Reset code on manual typing
+                    onChanged(val);
+                  },
                   decoration: InputDecoration(
                     prefixIcon: Icon(icon, color: Colors.grey),
                     labelText: label,
                     border: InputBorder.none,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    suffixIcon: isLoading
+                        ? Transform.scale(
+                            scale: 0.5,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : null,
                   ),
                 );
               },

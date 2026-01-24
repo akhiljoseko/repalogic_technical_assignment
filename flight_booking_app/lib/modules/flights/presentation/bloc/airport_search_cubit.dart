@@ -23,10 +23,11 @@ class AirportSearchCubit extends Cubit<AirportSearchState> {
   /// If [query] is empty, emits [AirportSearchState.initial].
   /// Otherwise, emits [AirportSearchState.loading] followed by
   /// [AirportSearchState.loaded] with results or [AirportSearchState.error].
-  Future<void> searchAirports(String query) async {
+  /// Returns the list of found airports for direct use in [Autocomplete].
+  Future<Iterable<Airport>> searchAirports(String query) async {
     if (query.isEmpty) {
       emit(const AirportSearchState.initial());
-      return;
+      return [];
     }
 
     emit(const AirportSearchState.loading());
@@ -36,8 +37,10 @@ class AirportSearchCubit extends Cubit<AirportSearchState> {
     switch (result) {
       case Ok(:final value):
         emit(AirportSearchState.loaded(value));
+        return value;
       case Error(:final error):
         emit(AirportSearchState.error(error.toString()));
+        return [];
     }
   }
 
