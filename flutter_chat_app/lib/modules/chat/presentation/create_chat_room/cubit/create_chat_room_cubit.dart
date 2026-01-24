@@ -66,7 +66,7 @@ class CreateChatRoomCubit extends Cubit<CreateChatRoomState> {
 
     final chatRoomResult = await _chatRoomsRepository.createChatRoom(
       roomName: roomName,
-      participantIds: loadedState.users.map((user) => user.id).toList()
+      participantIds: loadedState.selectedUsers.map((user) => user.id).toList()
         ..add(_activeUserId),
     );
 
