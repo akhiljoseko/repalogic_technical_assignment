@@ -46,34 +46,39 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
       },
       child: SafeArea(
         child: ScreenHorizontalPadding(
-          child: Column(
-            mainAxisSize: .min,
-            children: [
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  hintText: context.l10n.fullNameLabel,
-                  helperText: '',
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Column(
+              mainAxisSize: .min,
+              children: [
+                TextFormField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    hintText: context.l10n.fullNameLabel,
+                    helperText: '',
+                  ),
+                  validator: (value) => FormValidators.validateRequired(
+                    value,
+                    context.l10n.fullNameLabel,
+                    context.l10n,
+                  ),
                 ),
-                validator: (value) => FormValidators.validateRequired(
-                  value,
-                  context.l10n.fullNameLabel,
-                  context.l10n,
+                const Vspace(24),
+                SizedBox(
+                  width: double.maxFinite,
+                  child: PrimaryButton(
+                    buttonLabel: context.l10n.addUserButton,
+                    onPressed: () {
+                      context.read<AddUserCubit>().addUser(
+                        name: _nameController.text.trim(),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              const Vspace(24),
-              SizedBox(
-                width: double.maxFinite,
-                child: PrimaryButton(
-                  buttonLabel: context.l10n.addUserButton,
-                  onPressed: () {
-                    context.read<AddUserCubit>().addUser(
-                      name: _nameController.text.trim(),
-                    );
-                  },
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

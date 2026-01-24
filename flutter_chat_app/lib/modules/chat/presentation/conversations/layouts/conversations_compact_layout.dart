@@ -37,6 +37,27 @@ class ConversationsCompactLayout extends StatelessWidget {
       body: BlocBuilder<ConversationsCubit, ConversationsState>(
         builder: (context, state) {
           if (state is ConversationsLoadSuccess) {
+            if (state.chatRooms.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.chat_bubble_outline,
+                      size: 48,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      context.l10n.noChatsAvailableMessage,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
             return ListView.builder(
               itemCount: state.chatRooms.length,
               itemBuilder: (context, index) {

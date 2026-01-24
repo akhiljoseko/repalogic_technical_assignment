@@ -121,5 +121,9 @@
   "typeMessageHint": "Type a message...",
   "@typeMessageHint": {
     "description": "Hint text for the chat input field"
+  },
+  "noChatsAvailableMessage": "No chats available",
+  "@noChatsAvailableMessage": {
+    "description": "Message displayed when the conversation list is empty"
   }
 }
